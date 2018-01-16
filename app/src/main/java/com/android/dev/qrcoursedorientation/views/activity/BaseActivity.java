@@ -17,17 +17,14 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         qrNavigator = new QrNavigator(getFragmentManager(),this);
+
+        displayQRView();
+    }
+
+
+
+    public void displayQRView(){
         qrNavigator.launchQrFragment();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
 

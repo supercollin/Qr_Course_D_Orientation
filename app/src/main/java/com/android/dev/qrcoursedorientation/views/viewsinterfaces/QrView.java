@@ -5,4 +5,6 @@ package com.android.dev.qrcoursedorientation.views.viewsinterfaces;
  */
 
 public interface QrView {
+
+
 }
