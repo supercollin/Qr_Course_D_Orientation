@@ -1,4 +1,4 @@
-package com.android.dev.qrcoursedorientation.fragment;
+package com.android.dev.qrcoursedorientation.presentation.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.android.dev.qrcoursedorientation.presentation.views.viewsinterfaces.QrView;
+import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 import com.google.zxing.Result;
 
 
