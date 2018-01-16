@@ -2,8 +2,10 @@ package com.android.dev.qrcoursedorientation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import com.android.dev.qrcoursedorientation.TimerService.MyBinder;
+import com.google.zxing.WriterException;
 
 public class BaseActivity extends AppCompatActivity {
     TimerService timerService;
@@ -52,6 +55,8 @@ public class BaseActivity extends AppCompatActivity {
         stopServiceButon.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if (mServiceBound) {
                     unbindService(mServiceConnection);
                     mServiceBound = false;
@@ -59,6 +64,22 @@ public class BaseActivity extends AppCompatActivity {
                 Intent intent = new Intent(BaseActivity.this,
                         TimerService.class);
                 stopService(intent);
+            }
+        });
+
+        printTimestampButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("click", "onClick: ");
+                try {
+
+                    Log.d("try", "onClick: ");
+                    Bitmap QR;
+                    QR = QrConverter.TextToImageEncode("bite@bite.com!#Depart",500);
+                    QrConverter.saveImage(BaseActivity.this,QR);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
