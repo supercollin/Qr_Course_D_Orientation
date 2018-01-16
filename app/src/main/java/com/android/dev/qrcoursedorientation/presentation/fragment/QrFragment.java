@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.android.dev.qrcoursedorientation.views.viewsinterfaces.QrView;
+import com.android.dev.qrcoursedorientation.presentation.views.viewsinterfaces.QrView;
 import com.google.zxing.Result;
 
 
