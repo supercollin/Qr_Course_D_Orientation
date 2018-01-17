@@ -11,14 +11,12 @@ import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
 
+import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.navigator.QrNavigator;
 import com.android.dev.qrcoursedorientation.services.QrChronometer;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements QrFragment.StartChronoInterface {
 
     QrNavigator qrNavigator;
     QrChronometer qrChronometer;
@@ -32,34 +30,6 @@ public class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         headerMessage = (TextView) findViewById(R.id.textViewMessage);
         //ButterKnife.bind(this,this);
-
-        Intent intent = new Intent(this, QrChronometer.class);
-        startService(intent);
-        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-
-        final Thread t = new Thread() {
-
-            @Override
-            public void run() {
-                while (!isInterrupted()) {
-                    try {
-                        Thread.sleep(1000);  //1000ms = 1 sec
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(qrChronometer != null){
-                                    headerMessage.setText(qrChronometer.getTimestamp());
-                                }
-                            }
-                        });
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-
-        t.start();
 
         qrNavigator = new QrNavigator(getFragmentManager(), this);
 
@@ -96,4 +66,35 @@ public class BaseActivity extends AppCompatActivity {
             mServiceBound = true;
         }
     };
+
+    @Override
+    public void startChrono(String link) {
+        Intent intent = new Intent(this, QrChronometer.class);
+        startService(intent);
+        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+
+        final Thread t = new Thread() {
+
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+                    try {
+                        Thread.sleep(1000);  //1000ms = 1 sec
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(qrChronometer != null){
+                                    headerMessage.setText(qrChronometer.getTimestamp());
+                                }
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        t.start();
+    }
 }
