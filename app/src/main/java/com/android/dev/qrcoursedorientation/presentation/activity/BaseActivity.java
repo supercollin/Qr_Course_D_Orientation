@@ -10,15 +10,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
-<<<<<<< Updated upstream:app/src/main/java/com/android/dev/qrcoursedorientation/presentation/activity/BaseActivity.java
+
 import com.android.dev.qrcoursedorientation.presentation.navigator.QrNavigator;
-=======
-import com.android.dev.qrcoursedorientation.navigator.QrNavigator;
 import com.android.dev.qrcoursedorientation.services.QrChronometer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
->>>>>>> Stashed changes:app/src/main/java/com/android/dev/qrcoursedorientation/views/activity/BaseActivity.java
 
 
 public class BaseActivity extends AppCompatActivity {

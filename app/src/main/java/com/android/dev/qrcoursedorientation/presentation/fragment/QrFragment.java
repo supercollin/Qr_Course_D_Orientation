@@ -1,4 +1,4 @@
-package com.android.dev.qrcoursedorientation.fragment;
+package com.android.dev.qrcoursedorientation.presentation.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,15 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-<<<<<<< Updated upstream:app/src/main/java/com/android/dev/qrcoursedorientation/presentation/fragment/QrFragment.java
-import com.android.dev.qrcoursedorientation.presentation.views.viewsinterfaces.QrView;
-=======
-import com.android.dev.qrcoursedorientation.views.activity.BaseActivity;
-import com.android.dev.qrcoursedorientation.views.viewsinterfaces.QrView;
->>>>>>> Stashed changes:app/src/main/java/com/android/dev/qrcoursedorientation/fragment/QrFragment.java
+import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
+
 import com.google.zxing.Result;
-
-
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 /**

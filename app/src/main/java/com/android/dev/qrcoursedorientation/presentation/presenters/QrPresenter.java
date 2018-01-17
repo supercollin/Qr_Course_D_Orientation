@@ -1,6 +1,6 @@
-package com.android.dev.qrcoursedorientation.presenters;
+package com.android.dev.qrcoursedorientation.presentation.presenters;
 
-import com.android.dev.qrcoursedorientation.presentation.views.viewsinterfaces.QrView;
+import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
 /**
  * Created by iem on 16/01/2018.
