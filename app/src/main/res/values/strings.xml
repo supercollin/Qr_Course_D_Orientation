@@ -3,4 +3,5 @@
 
     <!-- fragments management -->
     <string name="qr_view">qrView</string>
+    <string name="qr_checkpoint_list_view">qrCheckpointListView</string>
 </resources>
