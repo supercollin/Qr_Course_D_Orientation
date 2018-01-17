@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 
 import com.android.dev.qrcoursedorientation.R;
-import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointListViewModel;
+import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointViewModel;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -28,7 +28,7 @@ public class QrCheckpointListViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void bind( final QrCheckpointListViewModel checkpoint){
+    public void bind( final QrCheckpointViewModel checkpoint){
         idBalise.setText(checkpoint.getIdBalise());
         time.setText(checkpoint.getTime());
     }

@@ -1,19 +1,23 @@
 package com.android.dev.qrcoursedorientation.presentation.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.dev.qrcoursedorientation.R;
+import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.presentation.adapter.QrCheckpointListAdapter;
 import com.android.dev.qrcoursedorientation.presentation.presenters.QrCheckpointListPresenter;
-import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointListViewModel;
+import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointViewModel;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrCheckpointListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,10 +33,11 @@ public class QrCheckpointListFragment extends Fragment implements QrCheckpointLi
     private QrCheckpointListPresenter qrCheckpointListPresenter;
     private QrCheckpointListAdapter qrCheckpointListAdapter;
 
-    @BindView(R.id.recycler_view_qr_checkpoint_list) RecyclerView qrChekpointListRecyclerView;
+    @BindView(R.id.recycler_view_qr_checkpoint_list) RecyclerView qrCheckpointListRecyclerView;
 
     public static QrCheckpointListFragment newInstance(){
         QrCheckpointListFragment qrCheckpointListFragment = new QrCheckpointListFragment();
+
         return qrCheckpointListFragment;
     }
 
@@ -41,19 +46,36 @@ public class QrCheckpointListFragment extends Fragment implements QrCheckpointLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_qr_checkpoint_list, container, false);
         ButterKnife.bind(this,view);
-        initRecyclerView();
+
+
 
         return view;
     }
 
     @Override
-    public void updateList(List<QrCheckpointListViewModel> qrCheckpointListViewModels){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initRecyclerView();
+
+
+
+        List<QrCheckpointViewModel> qrCheckpointListViewModels = new ArrayList<>();
+        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("1", "789", 10.0, 5.5)));
+        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("2", "2221", 10.0, 5.5)));
+        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("3", "456", 10.0, 5.5)));
+        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("4", "958", 10.0, 5.5)));
+        updateList(qrCheckpointListViewModels);
+    }
+
+    @Override
+    public void updateList(List<QrCheckpointViewModel> qrCheckpointListViewModels){
         qrCheckpointListAdapter.setQrCheckpointList(qrCheckpointListViewModels);
     }
 
     private void initRecyclerView() {
         qrCheckpointListAdapter = new QrCheckpointListAdapter();
-        qrChekpointListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        qrChekpointListRecyclerView.setAdapter(qrCheckpointListAdapter);
+        qrCheckpointListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        qrCheckpointListRecyclerView.setAdapter(qrCheckpointListAdapter);
     }
 }

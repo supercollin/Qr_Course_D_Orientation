@@ -6,11 +6,11 @@ import com.android.dev.qrcoursedorientation.models.Checkpoint;
  * Created by iem on 16/01/2018.
  */
 
-public class QrCheckpointListViewModel {
+public class QrCheckpointViewModel {
 
     private Checkpoint checkpoint;
 
-    public QrCheckpointListViewModel(Checkpoint checkpoint) {
+    public QrCheckpointViewModel(Checkpoint checkpoint) {
         this.checkpoint = checkpoint;
     }
 

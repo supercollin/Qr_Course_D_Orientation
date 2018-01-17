@@ -1,6 +1,6 @@
 package com.android.dev.qrcoursedorientation.presentation.viewsinterfaces;
 
-import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointListViewModel;
+import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointViewModel;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  */
 
 public interface QrCheckpointListView {
-    public void updateList(List<QrCheckpointListViewModel> qrCheckpointListViewModels);
+    void updateList(List<QrCheckpointViewModel> qrCheckpointListViewModels);
 
 }

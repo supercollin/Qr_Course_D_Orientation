@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.presentation.viewholder.QrCheckpointListViewHolder;
-import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointListViewModel;
+import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ import java.util.List;
 public class QrCheckpointListAdapter extends RecyclerView.Adapter<QrCheckpointListViewHolder> {
 
 
-    private List<QrCheckpointListViewModel> checkpointList;
+    private List<QrCheckpointViewModel> checkpointList;
 
     public QrCheckpointListAdapter() {
         this.checkpointList = new ArrayList<>();
     }
 
 
-    public void setQrCheckpointList(List<QrCheckpointListViewModel> checkpointList) {
+    public void setQrCheckpointList(List<QrCheckpointViewModel> checkpointList) {
         this.checkpointList = checkpointList;
         notifyDataSetChanged();
     }
