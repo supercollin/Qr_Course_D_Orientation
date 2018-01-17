@@ -8,9 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Context;
+
+import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
 import com.google.zxing.Result;
+
+import butterknife.BindView;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
@@ -27,13 +32,9 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof StartChronoInterface) {
-        } else {
-            listener = (StartChronoInterface) context;
-            throw new ClassCastException(context.toString()
-                    + " must implement MyListFragment.OnItemSelectedListener");
-        }
+        listener = (StartChronoInterface) context;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mScannerView = new ZXingScannerView(this.getContext());   // Programmatically initialize the scanner view
@@ -61,5 +62,6 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         Log.v("ok", rawResult.getText()); // Prints scan results
         mScannerView.resumeCameraPreview(this);
         listener.startChrono("start chrono");
+        //CheckPointManager.createCheckPoint(rawResult.getText(),);
     }
 }

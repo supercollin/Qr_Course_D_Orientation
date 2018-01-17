@@ -31,7 +31,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private QrChronometer qrChronometer;
+    QrChronometer qrChronometer;
     private boolean mServiceBound =false;
 
     @BindView(R.id.textViewMessage) TextView headerMessage;
@@ -112,9 +112,5 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             mServiceBound = true;
         }
     };
-
-
-
-
 
 }
