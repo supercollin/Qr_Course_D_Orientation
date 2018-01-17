@@ -1,12 +1,12 @@
-package com.android.dev.qrcoursedorientation.navigator;
+package com.android.dev.qrcoursedorientation.presentation.navigator;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 
 import com.android.dev.qrcoursedorientation.R;
-import com.android.dev.qrcoursedorientation.fragment.QrFragment;
-import com.android.dev.qrcoursedorientation.views.viewsinterfaces.QrView;
+import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
+import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
 /**
  * Created by iem on 16/01/2018.
