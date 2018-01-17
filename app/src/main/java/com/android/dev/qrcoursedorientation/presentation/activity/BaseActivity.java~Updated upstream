@@ -1,10 +1,10 @@
-package com.android.dev.qrcoursedorientation.views.activity;
+package com.android.dev.qrcoursedorientation.presentation.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.android.dev.qrcoursedorientation.R;
-import com.android.dev.qrcoursedorientation.navigator.QrNavigator;
+import com.android.dev.qrcoursedorientation.presentation.navigator.QrNavigator;
 
 
 public class BaseActivity extends AppCompatActivity {

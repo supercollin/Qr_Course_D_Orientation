@@ -9,7 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+<<<<<<< Updated upstream:app/src/main/java/com/android/dev/qrcoursedorientation/presentation/fragment/QrFragment.java
+import com.android.dev.qrcoursedorientation.presentation.views.viewsinterfaces.QrView;
+=======
+import com.android.dev.qrcoursedorientation.views.activity.BaseActivity;
 import com.android.dev.qrcoursedorientation.views.viewsinterfaces.QrView;
+>>>>>>> Stashed changes:app/src/main/java/com/android/dev/qrcoursedorientation/fragment/QrFragment.java
 import com.google.zxing.Result;
 
 
@@ -57,5 +62,6 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         // Do something with the result here
         Log.v("ok", rawResult.getText()); // Prints scan results
         mScannerView.resumeCameraPreview(this);
+
     }
 }
