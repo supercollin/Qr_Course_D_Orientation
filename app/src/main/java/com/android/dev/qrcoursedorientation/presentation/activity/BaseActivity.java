@@ -77,16 +77,18 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        Thread.sleep(1000);  //1000ms = 1 sec
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(qrChronometer != null){
-                                    headerMessage.setText(qrChronometer.getTimestamp());
-                                    CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
+                        if(CheckPointManager.isRun()) {
+                            Thread.sleep(1000);  //1000ms = 1 sec
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (qrChronometer != null) {
+                                        headerMessage.setText(qrChronometer.getTimestamp());
+                                        CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -96,12 +98,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
 
         t.start();
     }
-
-    @Override
-    public String getChrono() {
-        return (String) headerMessage.getText();
-    }
-
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
 
