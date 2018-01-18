@@ -49,4 +49,14 @@ public class Checkpoint {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    @Override
+    public String toString() {
+        return "Checkpoint{" +
+                "idBalise='" + idBalise + '\'' +
+                ", time='" + time + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

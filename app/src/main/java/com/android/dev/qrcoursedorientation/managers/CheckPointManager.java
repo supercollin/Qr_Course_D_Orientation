@@ -17,8 +17,13 @@ public class CheckPointManager {
 
 
     private static List<Checkpoint> qrCheckpointListViewModels = new ArrayList<>();
+    private static String timeStamp = "0:0:0";
 
-    public static void createCheckPoint(String qrResuult, String time, int longitude, int latitude) {
+    public static void setTimeStamp(String time){
+        timeStamp = time;
+    }
+
+    public static void createCheckPoint(String qrResuult, int longitude, int latitude) {
 
         Checkpoint tmp;
 
@@ -34,9 +39,13 @@ public class CheckPointManager {
         }
 
         if(matcher.group(2) != "end"){
-            tmp = new Checkpoint(matcher.group(1),time,latitude,longitude);
+            tmp = new Checkpoint(matcher.group(1),timeStamp,latitude,longitude);
             qrCheckpointListViewModels.add(tmp);
         }
 
+    }
+
+    public static List<Checkpoint> getQrCheckpointListViewModels() {
+        return qrCheckpointListViewModels;
     }
 }

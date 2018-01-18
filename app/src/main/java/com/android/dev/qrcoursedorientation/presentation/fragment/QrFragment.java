@@ -13,6 +13,7 @@ import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
+import com.android.dev.qrcoursedorientation.services.QrChronometer;
 import com.google.zxing.Result;
 
 import butterknife.BindView;
@@ -27,6 +28,8 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
     public interface StartChronoInterface {
         // This can be any number of events to be sent to the activity
         void startChrono(String link);
+
+        String getChrono();
     }
 
     @Override
@@ -62,6 +65,7 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         Log.v("ok", rawResult.getText()); // Prints scan results
         mScannerView.resumeCameraPreview(this);
         listener.startChrono("start chrono");
-        //CheckPointManager.createCheckPoint(rawResult.getText(),);
+        CheckPointManager.createCheckPoint(rawResult.getText(), 0, 0);
+        Log.d("checkpoint", CheckPointManager.getQrCheckpointListViewModels().toString());
     }
 }
