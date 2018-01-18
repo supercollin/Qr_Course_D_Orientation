@@ -69,7 +69,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
     public void startChrono(String link) {
         Intent intent = new Intent(this, QrChronometer.class);
         startService(intent);
-        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+        bindService(intent, mServiceConnection, Context.BIND_DEBUG_UNBIND);
 
         final Thread t = new Thread() {
 

@@ -8,14 +8,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.dev.qrcoursedorientation.R;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.CreateCourseDialog;
 
 import butterknife.ButterKnife;
 
 public class StartActivity extends AppCompatActivity {
 
-
-
-
+    CreateCourseDialog createCourseDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,19 +23,20 @@ public class StartActivity extends AppCompatActivity {
 
         Button buttonCreateCourse = findViewById(R.id.buttonCreateCourse) ;
         Button buttonRunCourse = findViewById(R.id.buttonRunCourse) ;
+        createCourseDialog = new CreateCourseDialog(StartActivity.this);
+
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                createCourseDialog.show();
             }
         });
 
         buttonRunCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartActivity.this, BaseActivity.class);
+                Intent intent = new Intent(StartActivity.this,BaseActivity.class);
                 startActivity(intent);
-
             }
         });
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="2"/>
+
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/editText"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="49dp"
+            android:layout_toEndOf="@+id/validate"
+            android:text="annuler" />
+
+        <Button
+            android:id="@+id/validate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/cancel"
+            android:layout_alignBottom="@+id/cancel"
+            android:layout_marginRight="16dp"
+            android:text="valider" />
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

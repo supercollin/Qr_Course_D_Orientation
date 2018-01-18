@@ -1,8 +1,13 @@
 package com.android.dev.qrcoursedorientation.managers;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
+import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
+import com.android.dev.qrcoursedorientation.utils.QrConverter;
+import com.google.zxing.WriterException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,5 +79,15 @@ public class CheckPointManager {
 
     public static List<Checkpoint> getCheckpointList() {
         return checkpointList;
+    }
+
+    public static void generateQr(int number, Context context) throws WriterException {
+
+        for (int i = 0; i<number; i++){
+            Bitmap QR;
+            QR = QrConverter.TextToImageEncode("bite@bite.com!#Depart",500);
+            QrConverter.saveImage(context,QR);
+        }
+
     }
 }
