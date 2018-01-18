@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class CheckPointManager {
 
 
-    private static List<Checkpoint> qrCheckpointListViewModels = new ArrayList<>();
+    private static List<Checkpoint> checkpointList = new ArrayList<>();
     private static String timeStamp = "0:0:0";
 
     public static void setTimeStamp(String time){
@@ -40,12 +40,12 @@ public class CheckPointManager {
 
         if(matcher.group(2) != "end"){
             tmp = new Checkpoint(matcher.group(1),timeStamp,latitude,longitude);
-            qrCheckpointListViewModels.add(tmp);
+            checkpointList.add(tmp);
         }
 
     }
 
-    public static List<Checkpoint> getQrCheckpointListViewModels() {
-        return qrCheckpointListViewModels;
+    public static List<Checkpoint> getCheckpointList() {
+        return checkpointList;
     }
 }
