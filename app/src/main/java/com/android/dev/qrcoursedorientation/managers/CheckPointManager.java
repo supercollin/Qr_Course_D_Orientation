@@ -6,6 +6,7 @@ import com.android.dev.qrcoursedorientation.models.Checkpoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,7 +39,7 @@ public class CheckPointManager {
             Log.d("grp3", matcher.group(3));
         }
 
-        if(matcher.group(2) != "end"){
+        if(!Objects.equals(matcher.group(2), "start") && qrCheckpointListViewModels.size() != 0){
             tmp = new Checkpoint(matcher.group(1),timeStamp,latitude,longitude);
             checkpointList.add(tmp);
         }
