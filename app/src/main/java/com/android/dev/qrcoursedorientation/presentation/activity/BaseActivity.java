@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
+import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrCheckpointListFragment;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
@@ -31,7 +32,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private QrChronometer qrChronometer;
+    QrChronometer qrChronometer;
     private boolean mServiceBound =false;
 
     @BindView(R.id.textViewMessage) TextView headerMessage;
@@ -83,6 +84,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                             public void run() {
                                 if(qrChronometer != null){
                                     headerMessage.setText(qrChronometer.getTimestamp());
+                                    CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
                                 }
                             }
                         });
@@ -94,6 +96,11 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         };
 
         t.start();
+    }
+
+    @Override
+    public String getChrono() {
+        return (String) headerMessage.getText();
     }
 
 
@@ -112,9 +119,5 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             mServiceBound = true;
         }
     };
-
-
-
-
 
 }
