@@ -48,17 +48,29 @@ public class CheckPointManager {
                 run = true;
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
-                checkpointList.add(tmp);
+                if(!containInList(tmp)) {
+                    checkpointList.add(tmp);
+                }
             } else if (Objects.equals(matcher.group(2), "end") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
-                checkpointList.add(tmp);
+                if(!containInList(tmp)) {
+                    checkpointList.add(tmp);
+                }
                 run = false;
             }
+
         }
 
     }
 
-
+    public static boolean containInList(Checkpoint point){
+        for (Checkpoint checkpoint: checkpointList) {
+            if (Objects.equals(checkpoint.getIdBalise(), point.getIdBalise())){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static List<Checkpoint> getCheckpointList() {
         return checkpointList;

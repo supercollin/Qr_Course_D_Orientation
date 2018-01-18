@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".presentation.activity.BaseActivity"></activity>
         <service android:name=".services.QrChronometer" />
+
     </application>
 
 </manifest>
