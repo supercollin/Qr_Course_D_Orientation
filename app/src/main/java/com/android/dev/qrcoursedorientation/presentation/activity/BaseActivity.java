@@ -97,12 +97,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         t.start();
     }
 
-    @Override
-    public String getChrono() {
-        return (String) headerMessage.getText();
-    }
-
-
     private ServiceConnection mServiceConnection = new ServiceConnection() {
 
         @Override
