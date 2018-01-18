@@ -63,7 +63,7 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         // Do something with the result here
         Log.v("ok", rawResult.getText()); // Prints scan results
         mScannerView.resumeCameraPreview(this);
-        
+
         if(CheckPointManager.getCheckpointList().size() == 0 && CheckPointManager.isRun()) {
             listener.startChrono("start chrono");
         }
