@@ -21,6 +21,7 @@
         </activity>
 
         <service android:name=".services.QrChronometer" />
+
     </application>
 
 </manifest>
