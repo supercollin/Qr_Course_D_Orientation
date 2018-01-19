@@ -1,15 +1,21 @@
 package com.android.dev.qrcoursedorientation.presentation.activity;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
@@ -19,35 +25,53 @@ import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
 import com.android.dev.qrcoursedorientation.presentation.transformers.ZoomOutPageTransformer;
 import com.android.dev.qrcoursedorientation.services.QrChronometer;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+
 
 public class BaseActivity extends FragmentActivity implements QrFragment.StartChronoInterface {
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
+    private Location location;
     QrChronometer qrChronometer;
-    private boolean mServiceBound =false;
+    private boolean mServiceBound = false;
+    private LocationRequest locationRequest;
+    private List<Double> coord = new ArrayList<>();
 
-    @BindView(R.id.textViewMessage) TextView headerMessage;
+    private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
+    private long FASTEST_INTERVAL = 2000; /* 2 sec */
+
+    @BindView(R.id.textViewMessage)
+    TextView headerMessage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        ButterKnife.bind(this,this);
+        ButterKnife.bind(this, this);
+
+        getCoord();
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
-        List fragments = new Vector();
+        List<Fragment> fragments = new Vector<>();
 
         // Ajout des Fragments dans la liste
-        fragments.add(Fragment.instantiate(this,QrFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this,QrCheckpointListFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, QrFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, QrCheckpointListFragment.class.getName()));
 
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
         viewPager = findViewById(R.id.pager);
@@ -78,7 +102,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             public void run() {
                 while (!isInterrupted()) {
                     try {
-                        if(CheckPointManager.isRun()) {
+                        if (CheckPointManager.isRun()) {
                             Thread.sleep(1000);  //1000ms = 1 sec
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -115,5 +139,49 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             mServiceBound = true;
         }
     };
+
+    public void getCoord() {
+
+        coord = new ArrayList<>();
+        coord.add(0.0);
+        coord.add(0.0);
+
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(UPDATE_INTERVAL);
+        locationRequest.setFastestInterval(FASTEST_INTERVAL);
+
+        // Create LocationSettingsRequest object using location request
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(locationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        // Check whether location settings are satisfied
+        // https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
+        // Google API SDK v11 uses getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        }else{
+            getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, new LocationCallback() {
+                        @Override
+                        public void onLocationResult(LocationResult locationResult) {
+                            // do work here
+                            onLocationChanged(locationResult.getLastLocation());
+                        }
+                    },
+                    Looper.myLooper()
+            );
+        }
+    }
+
+    public void onLocationChanged(Location location) {
+        // You can now create a LatLng Object for use with maps
+        CheckPointManager.setLongitude(location.getLongitude());
+        CheckPointManager.setLatitude(location.getLatitude());
+    }
+
 
 }

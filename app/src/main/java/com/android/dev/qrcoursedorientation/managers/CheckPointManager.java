@@ -25,6 +25,24 @@ public class CheckPointManager {
 
     private static List<Checkpoint> checkpointList = new ArrayList<>();
     private static String timeStamp = "0:0:0";
+    private static double longitude;
+    private static double latitude;
+
+    public static double getLongitude() {
+        return longitude;
+    }
+
+    public static void setLongitude(double longitude) {
+        CheckPointManager.longitude = longitude;
+    }
+
+    public static double getLatitude() {
+        return latitude;
+    }
+
+    public static void setLatitude(double latitude) {
+        CheckPointManager.latitude = latitude;
+    }
 
     private static boolean run = false;
 
@@ -36,7 +54,7 @@ public class CheckPointManager {
         return run;
     }
 
-    public static void createCheckPoint(Context context, String qrResuult, int longitude, int latitude) {
+    public static void createCheckPoint(Context context, String qrResuult) {
 
         Checkpoint tmp;
 
@@ -49,6 +67,7 @@ public class CheckPointManager {
             Log.d("grp1", matcher.group(1));
             Log.d("grp2", matcher.group(2));
             Log.d("grp3", matcher.group(3));
+            Log.d("grp3", latitude + "" +longitude);
 
             if (Objects.equals(matcher.group(2), "start")) {
                 run = true;
