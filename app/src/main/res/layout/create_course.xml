@@ -1,43 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/numberOfCheckpoint"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="130dp"
+        android:text="annuler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="2"/>
+    <Button
+        android:id="@+id/validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/cancel"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="130dp"
+        android:text="valider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/numberOfCheckpoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/validate"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewNumber"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/editText"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="49dp"
-            android:layout_toEndOf="@+id/validate"
-            android:text="annuler" />
+    <EditText
+        android:id="@+id/mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/validate"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewMail"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/validate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/cancel"
-            android:layout_alignBottom="@+id/cancel"
-            android:layout_marginRight="16dp"
-            android:text="valider" />
+    <TextView
+        android:id="@+id/textViewMail"
+        android:layout_width="71dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="mail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/textViewNumber"
+        android:layout_width="71dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="nombre de balise"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMail" />
 
 </android.support.constraint.ConstraintLayout>

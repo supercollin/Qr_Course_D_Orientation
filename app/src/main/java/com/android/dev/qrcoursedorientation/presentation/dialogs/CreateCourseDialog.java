@@ -1,11 +1,13 @@
 package com.android.dev.qrcoursedorientation.presentation.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.android.dev.qrcoursedorientation.R;
@@ -29,15 +31,21 @@ public class CreateCourseDialog{
         Log.d("show", "show: ");
         final Dialog d = new Dialog(context);
         d.setContentView(R.layout.create_course);
+
         Button validate = d.findViewById(R.id.validate);
-        final Button cancel = d.findViewById(R.id.cancel);
+        Button cancel = d.findViewById(R.id.cancel);
+        final EditText numberOfCheckpoint = d.findViewById(R.id.numberOfCheckpoint);
+        final EditText mail = d.findViewById(R.id.mail);
+
         validate.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 d.dismiss();
+                String mailText = mail.getText().toString();
                 try {
-                    CheckPointManager.generateQr(2,context);
+                    int checkpointNumber = Integer.valueOf(numberOfCheckpoint.getText().toString());
+                    CheckPointManager.generateQr(checkpointNumber,mailText,context);
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }

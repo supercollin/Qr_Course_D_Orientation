@@ -16,7 +16,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Guillaume Colletaz on 16/01/2018.
@@ -61,22 +64,31 @@ public class QrConverter {
         return bitmap;
     }
 
-    public static void saveImage(Context context, Bitmap myBitmap) {
+    public static void saveImage(Context context, String type,int num, Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        Date date;
+        date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
+        String folderName = formatter.format(date);
+
         File wallpaperDirectory = new File(
-                String.valueOf(Environment.getExternalStorageDirectory())+ "/QrCode/" );
+                String.valueOf(Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName));
         // have the object build the directory structure, if needed.
 
         if (!wallpaperDirectory.exists()) {
-            Log.d("dirrrrrr", "" + wallpaperDirectory.mkdirs());
             wallpaperDirectory.mkdirs();
         }
 
+        String fileName;
+        if(!Objects.equals(type, "checkpoint")){
+            fileName = type;
+        }else {
+            fileName = type + "_num_" + num;
+        }
+
         try {
-            File f = new File(wallpaperDirectory, Calendar.getInstance()
-                    .getTimeInMillis() + ".jpg");
-            Log.d("path", "saveImage: "+ f.getAbsolutePath());
+            File f = new File(wallpaperDirectory, fileName + ".jpg");
             f.createNewFile();   //give read write permission
             FileOutputStream fo = new FileOutputStream(f);
             fo.write(bytes.toByteArray());
@@ -84,9 +96,6 @@ public class QrConverter {
                     new String[]{f.getPath()},
                     new String[]{"image/jpeg"}, null);
             fo.close();
-            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
-
-            Log.d("path", "saveImage: "+ f.getAbsolutePath());
         } catch (IOException e1) {
             e1.printStackTrace();
         }

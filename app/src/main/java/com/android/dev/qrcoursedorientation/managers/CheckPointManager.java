@@ -51,6 +51,10 @@ public class CheckPointManager {
 
             if (Objects.equals(matcher.group(2), "start") && checkpointList.size() == 0) {
                 run = true;
+                tmp = new Checkpoint(matcher.group(1), "0:0:0", latitude, longitude);
+                if(!containInList(tmp)) {
+                    checkpointList.add(tmp);
+                }
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
                 if(!containInList(tmp)) {
@@ -81,13 +85,17 @@ public class CheckPointManager {
         return checkpointList;
     }
 
-    public static void generateQr(int number, Context context) throws WriterException {
+    public static void generateQr(int number, String mail, Context context) throws WriterException {
+        Bitmap QR;
+        QR = QrConverter.TextToImageEncode("#Depart#start#",500);
+        QrConverter.saveImage(context,"start",0,QR);
 
-        for (int i = 0; i<number; i++){
-            Bitmap QR;
-            QR = QrConverter.TextToImageEncode("bite@bite.com!#Depart",500);
-            QrConverter.saveImage(context,QR);
+        for (int i = 1; i<=number; i++){
+            QR = QrConverter.TextToImageEncode("#"+i+"!#checkpoint#",500);
+            QrConverter.saveImage(context,"checkpoint",i,QR);
         }
 
+        QR = QrConverter.TextToImageEncode("#Arrivé#end#"+mail,500);
+        QrConverter.saveImage(context,"end",0,QR);
     }
 }
