@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
+import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.utils.QrConverter;
 import com.google.zxing.WriterException;
 
@@ -35,7 +36,7 @@ public class CheckPointManager {
         return run;
     }
 
-    public static void createCheckPoint(String qrResuult, int longitude, int latitude) {
+    public static void createCheckPoint(Context context, String qrResuult, int longitude, int latitude) {
 
         Checkpoint tmp;
 
@@ -49,25 +50,36 @@ public class CheckPointManager {
             Log.d("grp2", matcher.group(2));
             Log.d("grp3", matcher.group(3));
 
-            if (Objects.equals(matcher.group(2), "start") && checkpointList.size() == 0) {
+            if (Objects.equals(matcher.group(2), "start")) {
                 run = true;
                 tmp = new Checkpoint(matcher.group(1), "0:0:0", latitude, longitude);
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
+                    DisplayToast.displayToast(context,"Scan réussi\nla course à commencé");
+                }else {
+                    DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
+                    DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
+                }else {
+                    DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
             } else if (Objects.equals(matcher.group(2), "end") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
+                    DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
+                }else {
+                    DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
                 run = false;
             }
 
+        }else {
+            DisplayToast.displayToast(context, "Le QrCode n'est pas au bon format");
         }
 
     }
@@ -91,11 +103,13 @@ public class CheckPointManager {
         QrConverter.saveImage(context,"start",0,QR);
 
         for (int i = 1; i<=number; i++){
-            QR = QrConverter.TextToImageEncode("#"+i+"!#checkpoint#",500);
+            QR = QrConverter.TextToImageEncode("#"+i+"#checkpoint#",500);
             QrConverter.saveImage(context,"checkpoint",i,QR);
         }
 
         QR = QrConverter.TextToImageEncode("#Arrivé#end#"+mail,500);
         QrConverter.saveImage(context,"end",0,QR);
+
+        DisplayToast.displayToast(context,"Les QrCode ont tous été créer");
     }
 }

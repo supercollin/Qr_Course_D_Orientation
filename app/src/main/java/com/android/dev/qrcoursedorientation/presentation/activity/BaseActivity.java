@@ -65,6 +65,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             mServiceBound = false;
         }
     }
+
     @Override
     public void startChrono(String link) {
         Intent intent = new Intent(this, QrChronometer.class);

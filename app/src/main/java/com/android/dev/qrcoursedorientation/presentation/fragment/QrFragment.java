@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.content.Context;
 
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
 import com.google.zxing.Result;
@@ -56,22 +57,21 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         mScannerView.stopCamera();           // Stop camera on pause
     }
 
-
-
     @Override
     public void handleResult(Result rawResult) {
         // Do something with the result here
-        Log.v("ok", rawResult.getText()); // Prints scan results
         mScannerView.resumeCameraPreview(this);
 
-        if(CheckPointManager.getCheckpointList().size() == 0 && CheckPointManager.isRun()) {
+        CheckPointManager.createCheckPoint(this.getContext(),rawResult.getText(), 0, 0);
+
+        if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
             listener.startChrono("start chrono");
         }
-        CheckPointManager.createCheckPoint(rawResult.getText(), 0, 0);
 
         final Intent intent = new Intent("UPDATE_DATA");
         intent.putExtra("CHECKPOINT_LIST", "update");
         LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
+
 
     }
 }
