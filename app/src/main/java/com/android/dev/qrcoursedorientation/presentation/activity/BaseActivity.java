@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -14,15 +15,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrCheckpointListFragment;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
-import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
 import com.android.dev.qrcoursedorientation.presentation.transformers.ZoomOutPageTransformer;
 import com.android.dev.qrcoursedorientation.services.QrChronometer;
 import com.google.android.gms.location.LocationCallback;
@@ -182,6 +182,4 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         CheckPointManager.setLongitude(location.getLongitude());
         CheckPointManager.setLatitude(location.getLatitude());
     }
-
-
 }

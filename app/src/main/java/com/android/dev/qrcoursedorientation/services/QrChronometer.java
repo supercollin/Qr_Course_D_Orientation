@@ -24,7 +24,8 @@ public class QrChronometer extends Service {
         super.onCreate();
         Log.v(LOG_TAG, "Start Chronometer");
         QrChronometer = new Chronometer(this);
-        QrChronometer.setBase(SystemClock.elapsedRealtime());
+        QrChronometer.setBase(103545559);
+        Log.d("onCreate: ", SystemClock.elapsedRealtime()+"");
         QrChronometer.start();
     }
 
@@ -57,6 +58,10 @@ public class QrChronometer extends Service {
         int minutes = (int) (elapsedMillis - hours * 3600000) / 60000;
         int seconds = (int) (elapsedMillis - hours * 3600000 - minutes * 60000) / 1000;
         return hours + ":" + minutes + ":" + seconds ;
+    }
+
+    public long getBase(){
+        return QrChronometer.getBase();
     }
 
     public void startChronometer() {
