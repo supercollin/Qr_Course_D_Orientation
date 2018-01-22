@@ -69,7 +69,7 @@ public class QrConverter {
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         Date date;
         date = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
         String folderName = formatter.format(date);
 
         File wallpaperDirectory = new File(

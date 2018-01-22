@@ -81,6 +81,6 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         intent.putExtra("CHECKPOINT_LIST", "update");
         LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
 
-
+        Log.d("list", CheckPointManager.getCheckpointList().toString());
     }
 }

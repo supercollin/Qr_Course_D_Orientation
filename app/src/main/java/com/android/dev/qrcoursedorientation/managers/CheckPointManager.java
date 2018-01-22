@@ -2,15 +2,26 @@ package com.android.dev.qrcoursedorientation.managers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
 import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.MailDialog;
+import com.android.dev.qrcoursedorientation.utils.MailSend;
 import com.android.dev.qrcoursedorientation.utils.QrConverter;
+import com.android.dev.qrcoursedorientation.utils.WriteCsv;
 import com.google.zxing.WriterException;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -91,6 +102,9 @@ public class CheckPointManager {
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
+                    WriteCsv.writeCourse(CheckPointManager.listToString());
+                    MailDialog mailDialog = new MailDialog();
+                    mailDialog.showDilaog(context);
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
@@ -131,4 +145,24 @@ public class CheckPointManager {
 
         DisplayToast.displayToast(context,"Les QrCode ont tous été créer");
     }
+
+    public static String listToString(){
+        StringBuilder checkpointToCSV = new StringBuilder();
+        checkpointToCSV.append("Balise,");
+        checkpointToCSV.append("Temp,");
+        checkpointToCSV.append("Latitude,");
+        checkpointToCSV.append("Longitude\n");
+        for (Checkpoint checkpoint: checkpointList) {
+            checkpointToCSV.append(checkpoint.getIdBalise());
+            checkpointToCSV.append(',');
+            checkpointToCSV.append(checkpoint.getTime());
+            checkpointToCSV.append(',');
+            checkpointToCSV.append(checkpoint.getLatitude());
+            checkpointToCSV.append(',');
+            checkpointToCSV.append(checkpoint.getLongitude());
+            checkpointToCSV.append("\n");
+        }
+        return checkpointToCSV.toString();
+    }
+
 }
