@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.activity.BaseActivity" />
-
+        <activity android:name=".presentation.activity.ChronicleActivity" />
         <service android:name=".services.QrChronometer" />
 
     </application>

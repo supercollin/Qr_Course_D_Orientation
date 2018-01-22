@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">QR Course d\'orientation</string>
 
+
+    <string name="title_1">Cool card</string>
+    <string name="title_2">Ok card</string>
+    <string name="title_3">Bad card</string>
+    <string name="title_4">Ugly card</string>
     <!-- fragments management -->
     <string name="qr_view">qrView</string>
     <string name="qr_checkpoint_list_view">qrCheckpointListView</string>

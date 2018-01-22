@@ -28,7 +28,8 @@ public class StartActivity extends AppCompatActivity {
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createCourseDialog.show();
+                Intent intent = new Intent(StartActivity.this,ChronicleActivity.class);
+                startActivity(intent);
             }
         });
 

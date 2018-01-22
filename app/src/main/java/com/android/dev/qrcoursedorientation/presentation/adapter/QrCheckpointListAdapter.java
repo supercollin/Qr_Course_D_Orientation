@@ -1,6 +1,5 @@
 package com.android.dev.qrcoursedorientation.presentation.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,7 @@ public class QrCheckpointListAdapter extends RecyclerView.Adapter<QrCheckpointLi
     @Override
     public QrCheckpointListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.viewholder, parent, false);
+        View view = inflater.inflate(R.layout.view_holder_qr_checkpoint_list, parent, false);
 
         return new QrCheckpointListViewHolder(view);
     }
