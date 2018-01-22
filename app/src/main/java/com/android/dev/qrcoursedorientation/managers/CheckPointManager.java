@@ -9,6 +9,7 @@ import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
 import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.MailDialog;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.MailQrDialog;
 import com.android.dev.qrcoursedorientation.utils.MailSend;
 import com.android.dev.qrcoursedorientation.utils.QrConverter;
 import com.android.dev.qrcoursedorientation.utils.WriteCsv;
@@ -153,7 +154,8 @@ public class CheckPointManager {
 
         DisplayToast.displayToast(context,"Les QrCode ont tous été créer");
 
-        MailSend.sendQrMail(context,"guillaume.colletaz01@gmail.com",folderName);
+        MailQrDialog mailQrDialog = new MailQrDialog();
+        mailQrDialog.showDilaog(context, mail, folderName);
     }
 
     public static String listToString(){
