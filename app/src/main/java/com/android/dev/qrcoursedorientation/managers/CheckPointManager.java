@@ -131,19 +131,29 @@ public class CheckPointManager {
     }
 
     public static void generateQr(int number, String mail, Context context) throws WriterException {
+
+        Date date;
+        date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
+        String folderName = formatter.format(date);
+
         Bitmap QR;
         QR = QrConverter.TextToImageEncode("#Depart#start#",500);
-        QrConverter.saveImage(context,"start",0,QR);
+        QrConverter.saveImage(context,"start",0,QR,folderName);
 
-        for (int i = 1; i<=number; i++){
-            QR = QrConverter.TextToImageEncode("#"+i+"#checkpoint#",500);
-            QrConverter.saveImage(context,"checkpoint",i,QR);
+        for (int i = 1; i<=number; i++) {
+            QR = QrConverter.TextToImageEncode("#" + i + "#checkpoint#", 500);
+            QrConverter.saveImage(context, "checkpoint", i, QR, folderName);
         }
 
         QR = QrConverter.TextToImageEncode("#Arrivé#end#"+mail,500);
-        QrConverter.saveImage(context,"end",0,QR);
+        QrConverter.saveImage(context,"end",0,QR,folderName);
+
+        QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName, Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName+".zip");
 
         DisplayToast.displayToast(context,"Les QrCode ont tous été créer");
+
+        MailSend.sendQrMail(context,"guillaume.colletaz01@gmail.com",folderName);
     }
 
     public static String listToString(){

@@ -1,6 +1,7 @@
 package com.android.dev.qrcoursedorientation.presentation.dialogs;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,9 +22,10 @@ public class MailDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                MailSend.sendMail(context,"guillaume.colletaz01@gmail.com","",12);
+                MailSend.sendResultMail(context,"guillaume.colletaz01@gmail.com",12);
             }
         }) ;
+        alertDialog.setCancelable(false);
         alertDialog.show();
     }
 }

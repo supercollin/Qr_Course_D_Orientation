@@ -13,6 +13,8 @@ import com.google.zxing.common.BitMatrix;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -20,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Created by Guillaume Colletaz on 16/01/2018.
@@ -64,13 +68,9 @@ public class QrConverter {
         return bitmap;
     }
 
-    public static void saveImage(Context context, String type,int num, Bitmap myBitmap) {
+    public static void saveImage(Context context, String type,int num, Bitmap myBitmap, String folderName) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        Date date;
-        date = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
-        String folderName = formatter.format(date);
 
         File wallpaperDirectory = new File(
                 String.valueOf(Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName));
@@ -100,6 +100,58 @@ public class QrConverter {
             e1.printStackTrace();
         }
 
+
+    }
+
+    static public void zipFolder(String srcFolder, String destZipFile){
+        ZipOutputStream zip = null;
+        FileOutputStream fileWriter = null;
+        try {
+            fileWriter = new FileOutputStream(destZipFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        zip = new ZipOutputStream(fileWriter);
+        try {
+            addFolderToZip("", srcFolder, zip);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            zip.flush();
+            zip.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static private void addFileToZip(String path, String srcFile,
+                                     ZipOutputStream zip) throws Exception {
+        File folder = new File(srcFile);
+        if (folder.isDirectory()) {
+            addFolderToZip(path, srcFile, zip);
+        } else {
+            byte[] buf = new byte[1024];
+            int len;
+            FileInputStream in = new FileInputStream(srcFile);
+            zip.putNextEntry(new ZipEntry(path + "/" + folder.getName()));
+            while ((len = in.read(buf)) > 0) {
+                zip.write(buf, 0, len);
+            }
+        }
+    }
+
+    static private void addFolderToZip(String path, String srcFolder,
+                                       ZipOutputStream zip) throws Exception {
+        File folder = new File(srcFolder);
+        for (String fileName : folder.list()) {
+            if (path.equals("")) {
+                addFileToZip(folder.getName(), srcFolder + "/" + fileName, zip);
+            } else {
+                addFileToZip(path + "/" + folder.getName(), srcFolder + "/"
+                        + fileName, zip);
+            }
+        }
     }
 
 }

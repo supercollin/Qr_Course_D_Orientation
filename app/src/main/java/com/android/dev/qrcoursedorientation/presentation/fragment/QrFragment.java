@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -31,6 +32,7 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
     private ZXingScannerView mScannerView;
     View view;
     List coordonnees = new ArrayList();
+    Vibrator vibrator;
     private StartChronoInterface listener;
 
     public interface StartChronoInterface {
@@ -42,6 +44,7 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
     public void onAttach(Context context) {
         super.onAttach(context);
         listener = (StartChronoInterface) context;
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         mScannerView.resumeCameraPreview(this);
 
         CheckPointManager.createCheckPoint(this.getContext(),rawResult.getText());
-        Log.d("add", CheckPointManager.getCheckpointList().toString());
+        vibrator.vibrate(100);
 
         if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
             listener.startChrono("start chrono");

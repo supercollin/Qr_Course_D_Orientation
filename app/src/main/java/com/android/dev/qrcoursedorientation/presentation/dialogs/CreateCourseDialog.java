@@ -48,6 +48,8 @@ public class CreateCourseDialog{
                     CheckPointManager.generateQr(checkpointNumber,mailText,context);
                 } catch (WriterException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
