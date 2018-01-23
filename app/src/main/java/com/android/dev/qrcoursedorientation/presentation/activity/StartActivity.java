@@ -22,13 +22,13 @@ public class StartActivity extends AppCompatActivity {
 
         Button buttonCreateCourse = findViewById(R.id.buttonCreateCourse) ;
         Button buttonRunCourse = findViewById(R.id.buttonRunCourse) ;
+        Button buttonChronicle = findViewById(R.id.buttonChronicle) ;
         createCourseDialog = new CreateCourseDialog(StartActivity.this);
 
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartActivity.this,ChronicleActivity.class);
-                startActivity(intent);
+                createCourseDialog.show();
             }
         });
 
@@ -36,6 +36,14 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this,BaseActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonChronicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this,ChronicleActivity.class);
                 startActivity(intent);
             }
         });
