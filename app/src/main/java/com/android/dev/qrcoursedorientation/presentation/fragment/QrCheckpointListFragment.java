@@ -71,14 +71,6 @@ public class QrCheckpointListFragment extends Fragment implements QrCheckpointLi
 
         initRecyclerView();
 
-
-
-//        List<QrCheckpointViewModel> qrCheckpointListViewModels = new ArrayList<>();
-//        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("1", "789", 10.0, 5.5)));
-//        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("2", "2221", 10.0, 5.5)));
-//        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("3", "456", 10.0, 5.5)));
-//        qrCheckpointListViewModels.add(new QrCheckpointViewModel(new Checkpoint("4", "958", 10.0, 5.5)));
-//        updateList(qrCheckpointListViewModels);
     }
 
     @Override

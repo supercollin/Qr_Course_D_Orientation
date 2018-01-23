@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.CreateCourseDialog;
 
-import butterknife.ButterKnife;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -23,6 +22,7 @@ public class StartActivity extends AppCompatActivity {
 
         Button buttonCreateCourse = findViewById(R.id.buttonCreateCourse) ;
         Button buttonRunCourse = findViewById(R.id.buttonRunCourse) ;
+        Button buttonChronicle = findViewById(R.id.buttonChronicle) ;
         createCourseDialog = new CreateCourseDialog(StartActivity.this);
 
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +36,14 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this,BaseActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonChronicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this,ChronicleActivity.class);
                 startActivity(intent);
             }
         });

@@ -39,6 +39,7 @@ public class CreateCourseDialog{
 
         validate.setOnClickListener(new View.OnClickListener()
         {
+
             @Override
             public void onClick(View v) {
                 d.dismiss();
