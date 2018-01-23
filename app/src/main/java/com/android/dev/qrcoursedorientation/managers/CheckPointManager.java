@@ -37,6 +37,16 @@ public class CheckPointManager {
 
     private static List<Checkpoint> checkpointList = new ArrayList<>();
     private static String timeStamp = "0:0:0";
+
+    public static long getTimeStampBase() {
+        return timeStampBase;
+    }
+
+    public static void setTimeStampBase(long timeStampBase) {
+        CheckPointManager.timeStampBase = timeStampBase;
+    }
+
+    private static long timeStampBase;
     private static double longitude;
     private static double latitude;
 
@@ -66,8 +76,8 @@ public class CheckPointManager {
         return run;
     }
 
-    public static void createCheckPoint(Context context, String qrResuult) {
-
+    public static boolean createCheckPoint(Context context, String qrResuult) {
+        boolean result = false;
         Checkpoint tmp;
 
         String res = "";
@@ -76,10 +86,6 @@ public class CheckPointManager {
         Matcher matcher = pattern.matcher(qrResuult);
         boolean matchFound = matcher.find();
         if (matchFound && matcher.groupCount() >= 1) {
-            Log.d("grp1", matcher.group(1));
-            Log.d("grp2", matcher.group(2));
-            Log.d("grp3", matcher.group(3));
-            Log.d("grp3", latitude + "" +longitude);
 
             if (Objects.equals(matcher.group(2), "start")) {
                 run = true;
@@ -87,6 +93,7 @@ public class CheckPointManager {
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Scan réussi\nla course à commencé");
+                    result = true;
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
@@ -95,6 +102,7 @@ public class CheckPointManager {
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
+                    result = true;
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
@@ -103,9 +111,7 @@ public class CheckPointManager {
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
-                    WriteCsv.writeCourse(CheckPointManager.listToString());
-                    MailDialog mailDialog = new MailDialog();
-                    mailDialog.showDilaog(context);
+                    result = true;
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
@@ -115,7 +121,7 @@ public class CheckPointManager {
         }else {
             DisplayToast.displayToast(context, "Le QrCode n'est pas au bon format");
         }
-
+        return result;
     }
 
     public static boolean containInList(Checkpoint point){
@@ -139,7 +145,7 @@ public class CheckPointManager {
         String folderName = formatter.format(date);
 
         Bitmap QR;
-        QR = QrConverter.TextToImageEncode("#Depart#start#",500);
+        QR = QrConverter.TextToImageEncode("#Depart#start#"+mail,500);
         QrConverter.saveImage(context,"start",0,QR,folderName);
 
         for (int i = 1; i<=number; i++) {
@@ -147,7 +153,7 @@ public class CheckPointManager {
             QrConverter.saveImage(context, "checkpoint", i, QR, folderName);
         }
 
-        QR = QrConverter.TextToImageEncode("#Arrivé#end#"+mail,500);
+        QR = QrConverter.TextToImageEncode("#Arrivé#end#",500);
         QrConverter.saveImage(context,"end",0,QR,folderName);
 
         QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName, Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName+".zip");
@@ -175,6 +181,10 @@ public class CheckPointManager {
             checkpointToCSV.append("\n");
         }
         return checkpointToCSV.toString();
+    }
+
+    public static Checkpoint getLastCheckpoint(){
+        return getCheckpointList().get(getCheckpointList().size()-1);
     }
 
 }

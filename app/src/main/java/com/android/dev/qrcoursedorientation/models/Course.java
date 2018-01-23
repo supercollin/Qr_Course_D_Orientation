@@ -1,6 +1,9 @@
 package com.android.dev.qrcoursedorientation.models;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,17 +15,34 @@ public class Course implements Serializable{
 
     private List<Checkpoint> checkpointList;
     private String status;
-    private String timestamp;
+    private long timestamp;
     private String mailOrganizer;
     private String idRunner;
-    private Date date;
+    private String date;
 
-    public Course(String status, String timestamp, String mailOrganizer, String idRunner, List<Checkpoint>checkpointList) {
+    public Course(String status, long timestamp, String mailOrganizer, String idRunner, List<Checkpoint>checkpointList) {
         this.status = status;
         this.timestamp = timestamp;
         this.mailOrganizer = mailOrganizer;
         this.idRunner = idRunner;
         this.checkpointList = checkpointList;
+        Date date;
+        date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.date = formatter.format(date);
+
+    }
+
+    public Course(String status, long timestamp, String mailOrganizer, String idRunner) {
+        this.status = status;
+        this.timestamp = timestamp;
+        this.mailOrganizer = mailOrganizer;
+        this.idRunner = idRunner;
+        this.checkpointList = new ArrayList<>();
+        Date date;
+        date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.date = formatter.format(date);
     }
 
     public String getStatus() {
@@ -33,11 +53,11 @@ public class Course implements Serializable{
         this.status = status;
     }
 
-    public String getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -60,15 +80,34 @@ public class Course implements Serializable{
     public Checkpoint getCheckpoint(int index){
         return checkpointList.get(index);
     }
+
     public void setCheckpointList(List<Checkpoint> checkpointList){
         this.checkpointList = checkpointList;
     }
 
-    public Date getDate() {
+    public List<Checkpoint> getCheckpointList() {
+        return checkpointList;
+    }
+
+    public String getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.date = formatter.format(date);
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "checkpointList=" + checkpointList +
+                ", status='" + status + '\'' +
+                ", timestamp=" + timestamp +
+                ", mailOrganizer='" + mailOrganizer + '\'' +
+                ", idRunner='" + idRunner + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 }

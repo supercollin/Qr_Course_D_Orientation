@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrCheckpointListFragment;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
@@ -90,6 +91,10 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         }
     }
 
+    public void setTimeStamp(){
+        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
+    }
+
     @Override
     public void startChrono(String link) {
         Intent intent = new Intent(this, QrChronometer.class);
@@ -109,7 +114,8 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                                 public void run() {
                                     if (qrChronometer != null) {
                                         headerMessage.setText(qrChronometer.getTimestamp());
-                                        CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
+
+                                        CourseManager.getCurrentCourse().setTimestamp(qrChronometer.getTimeStampBase());
                                     }
                                 }
                             });

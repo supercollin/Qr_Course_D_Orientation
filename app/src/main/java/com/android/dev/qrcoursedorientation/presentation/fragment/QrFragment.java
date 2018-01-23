@@ -16,6 +16,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
@@ -73,17 +74,19 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         // Do something with the result here
         mScannerView.resumeCameraPreview(this);
 
-        CheckPointManager.createCheckPoint(this.getContext(),rawResult.getText());
-        vibrator.vibrate(100);
+        if(CheckPointManager.createCheckPoint(this.getContext(),rawResult.getText())){
+            if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
+                listener.startChrono("start chrono");
+            }
 
-        if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
-            listener.startChrono("start chrono");
+            CourseManager.createCourse(this.getContext(), rawResult.getText(),CheckPointManager.getTimeStampBase(),"12");
         }
+        vibrator.vibrate(100);
 
         final Intent intent = new Intent("UPDATE_DATA");
         intent.putExtra("CHECKPOINT_LIST", "update");
         LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
 
-        Log.d("list", CheckPointManager.getCheckpointList().toString());
+        Log.d("handleResult: ",CourseManager.getCourseList().toString());
     }
 }

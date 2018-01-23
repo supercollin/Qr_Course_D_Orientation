@@ -59,6 +59,10 @@ public class QrChronometer extends Service {
         return hours + ":" + minutes + ":" + seconds ;
     }
 
+    public long getTimeStampBase(){
+        return QrChronometer.getBase();
+    }
+
     public void startChronometer() {
         QrChronometer.start();
     }
