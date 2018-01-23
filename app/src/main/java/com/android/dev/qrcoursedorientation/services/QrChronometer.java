@@ -24,8 +24,7 @@ public class QrChronometer extends Service {
         super.onCreate();
         Log.v(LOG_TAG, "Start Chronometer");
         QrChronometer = new Chronometer(this);
-        QrChronometer.setBase(103545559);
-        Log.d("onCreate: ", SystemClock.elapsedRealtime()+"");
+        QrChronometer.setBase(SystemClock.elapsedRealtime());
         QrChronometer.start();
     }
 
