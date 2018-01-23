@@ -91,10 +91,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         }
     }
 
-    public void setTimeStamp(){
-        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
-    }
-
     @Override
     public void startChrono(String link) {
         Intent intent = new Intent(this, QrChronometer.class);
@@ -114,7 +110,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                                 public void run() {
                                     if (qrChronometer != null) {
                                         headerMessage.setText(qrChronometer.getTimestamp());
-
+                                        CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
                                         CourseManager.getCurrentCourse().setTimestamp(qrChronometer.getTimeStampBase());
                                     }
                                 }

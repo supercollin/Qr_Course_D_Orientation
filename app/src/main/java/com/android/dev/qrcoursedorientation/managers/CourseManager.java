@@ -41,6 +41,10 @@ public class CourseManager {
         CourseManager.courseList.add(course);
     }
 
+    public static void setCourseListFromList(List<Course> courses) {
+        CourseManager.courseList = courses;
+    }
+
     public static void createCourse(Context context, String qrResuult,long timeStamp, String idRunner){
         String mail;
         Course course;
