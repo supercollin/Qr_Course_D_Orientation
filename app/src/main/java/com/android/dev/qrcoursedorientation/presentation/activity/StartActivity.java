@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.CreateCourseDialog;
 
-import butterknife.ButterKnife;
 
 public class StartActivity extends AppCompatActivity {
 
