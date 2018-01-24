@@ -42,8 +42,15 @@ public class StartActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Log.d("onCreate: ", CourseManager.getCurrentCourse().toString());
+
         if(Objects.equals(CourseManager.getCurrentCourse().getStatus(), "start")){
             buttonRestartCourse.setVisibility(View.VISIBLE);
+            Course course = CourseManager.getCurrentCourse();
+            Log.d("onClick: ",course.toString());
+            CheckPointManager.setCheckpointList(course.getCheckpointList());
+            CheckPointManager.setTimeStampBase(course.getTimestamp());
+            CheckPointManager.setRun(true);
         }else{
             buttonRestartCourse.setVisibility(View.INVISIBLE);
         }
@@ -80,12 +87,6 @@ public class StartActivity extends AppCompatActivity {
         buttonRestartCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Course course = CourseManager.getCurrentCourse();
-                Log.d("onClick: ",course.toString());
-                CheckPointManager.setCheckpointList(course.getCheckpointList());
-                CheckPointManager.setTimeStampBase(course.getTimestamp());
-                CheckPointManager.setRun(true);
-
                 Intent intent = new Intent(StartActivity.this,BaseActivity.class);
                 startActivity(intent);
             }

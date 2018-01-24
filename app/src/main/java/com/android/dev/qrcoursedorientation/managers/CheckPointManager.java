@@ -107,19 +107,16 @@ public class CheckPointManager {
                 }
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
-                if(!containInList(tmp)) {
-                    checkpointList.add(tmp);
-                    DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
-                    result = true;
-                }else {
-                    DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
-                }
+                checkpointList.add(tmp);
+                DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
+                result = true;
             } else if (Objects.equals(matcher.group(2), "end") && run) {
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
                     result = true;
+                    CheckPointManager.setTimeStampBase(0);
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.IBinder;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -99,7 +100,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         Intent intent = new Intent(this, QrChronometer.class);
         startService(intent);
         bindService(intent, mServiceConnection, Context.BIND_DEBUG_UNBIND);
-        Log.d("startChrono: ",CheckPointManager.getTimeStampBase()+"");
         final Thread t = new Thread() {
 
             @Override
@@ -114,9 +114,8 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                                     if (qrChronometer != null) {
                                         headerMessage.setText(qrChronometer.getTimestamp());
                                         CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
-                                        if(CheckPointManager.getTimeStampBase()!=0) {
-                                            CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
-                                        }
+                                        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
+                                        CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
                                     }
                                 }
                             });
