@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
+import com.android.dev.qrcoursedorientation.models.Course;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
 import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.MailDialog;
@@ -37,6 +38,13 @@ public class CheckPointManager {
 
     private static List<Checkpoint> checkpointList = new ArrayList<>();
     private static String timeStamp = "0:0:0";
+    private static long timeStampBase;
+    private static double longitude;
+    private static boolean run = false;
+
+    public static void setRun(boolean run) {
+        CheckPointManager.run = run;
+    }
 
     public static long getTimeStampBase() {
         return timeStampBase;
@@ -46,8 +54,6 @@ public class CheckPointManager {
         CheckPointManager.timeStampBase = timeStampBase;
     }
 
-    private static long timeStampBase;
-    private static double longitude;
     private static double latitude;
 
     public static double getLongitude() {
@@ -66,14 +72,16 @@ public class CheckPointManager {
         CheckPointManager.latitude = latitude;
     }
 
-    private static boolean run = false;
-
     public static void setTimeStamp(String time){
         timeStamp = time;
     }
 
     public static boolean isRun() {
         return run;
+    }
+
+    public static void setCheckpointList(List<Checkpoint> checkpointList) {
+        CheckPointManager.checkpointList = checkpointList;
     }
 
     public static boolean createCheckPoint(Context context, String qrResuult) {
@@ -115,7 +123,6 @@ public class CheckPointManager {
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
-                run = false;
             }
 
         }else {
@@ -187,4 +194,11 @@ public class CheckPointManager {
         return getCheckpointList().get(getCheckpointList().size()-1);
     }
 
+    public static void cleanCheckpointManager(){
+        List<Checkpoint> checkPoints = new ArrayList<>();
+        CheckPointManager.setCheckpointList(checkPoints);
+        CheckPointManager.setRun(false);
+        CheckPointManager.setTimeStampBase(0);
+        CheckPointManager.setTimeStamp("0:0:0");
+    }
 }

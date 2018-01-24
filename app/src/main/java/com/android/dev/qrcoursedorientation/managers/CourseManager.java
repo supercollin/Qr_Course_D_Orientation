@@ -1,6 +1,7 @@
 package com.android.dev.qrcoursedorientation.managers;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
@@ -21,7 +22,7 @@ import java.util.regex.Pattern;
 public class CourseManager {
 
     private static List<Course> courseList = new ArrayList<>();
-    private static Course timeStampCourse = new Course("",0,"","");
+    private static Course timeStampCourse = new Course("stop", SystemClock.elapsedRealtime(),"","");
 
     public static List<Course> getCourseList() {
         return courseList;
@@ -73,6 +74,7 @@ public class CourseManager {
                         mailDialog.showDilaog(context);
                     }
                 }
+                CheckPointManager.cleanCheckpointManager();
             }else if (Objects.equals(matcher.group(2), "checkpoint")) {
                 checkpoint = CheckPointManager.getLastCheckpoint();
                 getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);

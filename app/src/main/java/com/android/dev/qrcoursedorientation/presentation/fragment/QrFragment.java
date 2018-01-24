@@ -48,6 +48,9 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         super.onAttach(context);
         listener = (StartChronoInterface) context;
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        final Intent intent = new Intent("UPDATE_DATA");
+        intent.putExtra("CHECKPOINT_LIST", "update");
+        LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
     }
 
     @Override
@@ -93,7 +96,5 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         final Intent intent = new Intent("UPDATE_DATA");
         intent.putExtra("CHECKPOINT_LIST", "update");
         LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
-
-        Log.d("handleResult: ",CourseManager.getCourseList().toString());
     }
 }
