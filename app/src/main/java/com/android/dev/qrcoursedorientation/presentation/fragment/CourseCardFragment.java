@@ -37,6 +37,7 @@ public class CourseCardFragment extends Fragment implements QrCheckpointListView
     private QrCheckpointListPresenter qrCheckpointListPresenter;
     private QrCheckpointListAdapter qrCheckpointListAdapter;
 
+    private List<QrCheckpointViewModel> checkpointViewModels;
     @BindView(R.id.recyclerviewchronicle) RecyclerView recyclerViewChronicle;
 
     @Override
@@ -53,15 +54,10 @@ public class CourseCardFragment extends Fragment implements QrCheckpointListView
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initRecyclerView();
-        List<QrCheckpointViewModel> qrCheckpointViewModels = new ArrayList<>();
-        for(int i=0; i < 5; i++){
-            qrCheckpointViewModels.add(new QrCheckpointViewModel(new Checkpoint(i+"","0",0,0)));
-        }
-        updateList(qrCheckpointViewModels);
-
+        updateList(checkpointViewModels);
     }
 
-    private void initRecyclerView() {
+    public void initRecyclerView() {
         qrCheckpointListAdapter = new QrCheckpointListAdapter();
         recyclerViewChronicle.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewChronicle.setAdapter(qrCheckpointListAdapter);
@@ -74,5 +70,9 @@ public class CourseCardFragment extends Fragment implements QrCheckpointListView
     @Override
     public void updateList(List<QrCheckpointViewModel> CheckpointListViewModels) {
         qrCheckpointListAdapter.setQrCheckpointList(CheckpointListViewModels);
+    }
+
+    public void setCheckpointViewModels(List<QrCheckpointViewModel> checkpointViewModels) {
+        this.checkpointViewModels = checkpointViewModels;
     }
 }

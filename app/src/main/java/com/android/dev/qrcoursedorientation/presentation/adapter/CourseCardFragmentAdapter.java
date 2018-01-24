@@ -6,9 +6,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.ViewGroup;
 
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
+import com.android.dev.qrcoursedorientation.models.Checkpoint;
+import com.android.dev.qrcoursedorientation.models.Course;
 import com.android.dev.qrcoursedorientation.presentation.fragment.CourseCardFragment;
+import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointViewModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,10 +29,15 @@ public class CourseCardFragmentAdapter extends FragmentStatePagerAdapter impleme
             super(fm);
             mFragments = new ArrayList<>();
             mBaseElevation = baseElevation;
-
-            for(int i = 0; i< 5; i++){
-                addCardFragment(new CourseCardFragment());
-
+            List<Course> courseList = CourseManager.getCourseList();
+            for(int i = 0; i< courseList.size(); i++){
+                    addCardFragment(new CourseCardFragment());
+                    List<QrCheckpointViewModel> checkpointViewModels = new ArrayList<>();
+                    List<Checkpoint> checkpointList = courseList.get(courseList.size() - 1 - i).getCheckpointList();
+                    for (int j = 0; j < checkpointList.size(); j++) {
+                        checkpointViewModels.add(new QrCheckpointViewModel(checkpointList.get(j)));
+                    }
+                    mFragments.get(i).setCheckpointViewModels(checkpointViewModels);
             }
         }
 
