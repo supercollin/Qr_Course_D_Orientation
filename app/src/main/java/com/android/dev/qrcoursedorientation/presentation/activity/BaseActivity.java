@@ -66,6 +66,9 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         ButterKnife.bind(this, this);
 
         getCoord();
+        if(CheckPointManager.isRun()){
+            startChrono("start chrono");
+        }
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List<Fragment> fragments = new Vector<>();
@@ -91,16 +94,12 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         }
     }
 
-    public void setTimeStamp(){
-        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
-    }
-
     @Override
     public void startChrono(String link) {
         Intent intent = new Intent(this, QrChronometer.class);
         startService(intent);
         bindService(intent, mServiceConnection, Context.BIND_DEBUG_UNBIND);
-
+        Log.d("startChrono: ",CheckPointManager.getTimeStampBase()+"");
         final Thread t = new Thread() {
 
             @Override
@@ -114,8 +113,10 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                                 public void run() {
                                     if (qrChronometer != null) {
                                         headerMessage.setText(qrChronometer.getTimestamp());
-
-                                        CourseManager.getCurrentCourse().setTimestamp(qrChronometer.getTimeStampBase());
+                                        CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
+                                        if(CheckPointManager.getTimeStampBase()!=0) {
+                                            CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
+                                        }
                                     }
                                 }
                             });

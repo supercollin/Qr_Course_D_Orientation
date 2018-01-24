@@ -21,8 +21,10 @@ import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
 import com.android.dev.qrcoursedorientation.services.GPSTracker;
+import com.android.dev.qrcoursedorientation.utils.FileWriter;
 import com.google.zxing.Result;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,9 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         super.onAttach(context);
         listener = (StartChronoInterface) context;
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        final Intent intent = new Intent("UPDATE_DATA");
+        intent.putExtra("CHECKPOINT_LIST", "update");
+        LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
     }
 
     @Override
@@ -78,15 +83,18 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
             if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
                 listener.startChrono("start chrono");
             }
-
             CourseManager.createCourse(this.getContext(), rawResult.getText(),CheckPointManager.getTimeStampBase(),"12");
+            try {
+                FileWriter.fileWriter(CourseManager.getCourseList());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.d( "handleResult: ",CourseManager.getCourseList().toString());
         }
         vibrator.vibrate(100);
 
         final Intent intent = new Intent("UPDATE_DATA");
         intent.putExtra("CHECKPOINT_LIST", "update");
         LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
-
-        Log.d("handleResult: ",CourseManager.getCourseList().toString());
     }
 }
