@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 /**
  * Created by iem on 19/01/2018.
@@ -15,7 +16,7 @@ import java.io.ObjectOutputStream;
 
 public class FileWriter {
 
-    public static void fileWriter (Course course) throws IOException {
+    public static void fileWriter (List<Course> course) throws IOException {
         File file = (new File(Environment.getDataDirectory()+ "/CourseList.ser"));
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
         objectOutputStream.writeObject(course);

@@ -60,8 +60,8 @@ public class Course implements Serializable{
     public Checkpoint getCheckpoint(int index){
         return checkpointList.get(index);
     }
-    public void setCheckpointList(List<Checkpoint> checkpointList){
-        this.checkpointList = checkpointList;
+    public void addCheckpoint(Checkpoint checkpoint){
+        this.checkpointList.add(checkpoint);
     }
 
     public Date getDate() {

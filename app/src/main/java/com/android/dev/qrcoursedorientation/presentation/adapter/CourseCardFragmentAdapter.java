@@ -27,6 +27,7 @@ public class CourseCardFragmentAdapter extends FragmentStatePagerAdapter impleme
 
             for(int i = 0; i< 5; i++){
                 addCardFragment(new CourseCardFragment());
+
             }
         }
 
