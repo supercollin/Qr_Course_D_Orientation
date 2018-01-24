@@ -16,7 +16,7 @@ import java.util.List;
 
 public class FileReader {
     public static List<Course> fileReader () throws IOException, ClassNotFoundException {
-        File file = (new File(Environment.getDataDirectory()+ "/CourseList.ser"));
+        File file = (new File(Environment.getExternalStorageDirectory()+ "/CourseList/CourseList.ser"));
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
         List<Course> course = (List<Course>) objectInputStream.readObject();
         objectInputStream.close();

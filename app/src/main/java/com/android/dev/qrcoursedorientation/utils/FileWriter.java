@@ -1,6 +1,7 @@
 package com.android.dev.qrcoursedorientation.utils;
 
 import android.os.Environment;
+import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Course;
 
@@ -16,10 +17,16 @@ import java.util.List;
 
 public class FileWriter {
 
-    public static void fileWriter (List<Course> course) throws IOException {
-        File file = (new File(Environment.getDataDirectory()+ "/CourseList.ser"));
+    public static void fileWriter (List<Course> courses) throws IOException {
+        File directory = (new File(Environment.getExternalStorageDirectory()+ "/CourseList"));
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File file = new File(directory, "CourseList.ser");
+        file.createNewFile();
+        Log.d("fileWriter: ",Environment.getDataDirectory().getPath());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
-        objectOutputStream.writeObject(course);
+        objectOutputStream.writeObject(courses);
         objectOutputStream.close();
     }
 }

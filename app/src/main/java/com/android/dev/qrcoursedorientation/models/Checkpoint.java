@@ -1,10 +1,12 @@
 package com.android.dev.qrcoursedorientation.models;
 
+import java.io.Serializable;
+
 /**
  * Created by iem on 16/01/2018.
  */
 
-public class Checkpoint {
+public class Checkpoint implements Serializable {
 
     private String idBalise;
     private String time;

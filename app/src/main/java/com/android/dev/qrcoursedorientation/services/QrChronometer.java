@@ -8,6 +8,9 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Chronometer;
 
+import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
+
 /**
  * Created by Guillaume Colletaz on 16/01/2018.
  */
@@ -22,9 +25,11 @@ public class QrChronometer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.v(LOG_TAG, "Start Chronometer");
         QrChronometer = new Chronometer(this);
-        QrChronometer.setBase(SystemClock.elapsedRealtime());
+        if(CheckPointManager.getTimeStampBase() == 0){
+            CheckPointManager.setTimeStampBase(SystemClock.elapsedRealtime());
+        }
+        QrChronometer.setBase(CheckPointManager.getTimeStampBase());
         QrChronometer.start();
     }
 
