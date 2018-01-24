@@ -41,13 +41,6 @@ public class QrCheckpointListFragment extends Fragment implements QrCheckpointLi
 
     @BindView(R.id.recycler_view_qr_checkpoint_list) RecyclerView qrCheckpointListRecyclerView;
 
-    public static QrCheckpointListFragment newInstance(){
-        QrCheckpointListFragment qrCheckpointListFragment = new QrCheckpointListFragment();
-
-        return qrCheckpointListFragment;
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.fragment_qr_checkpoint_list, container, false);
