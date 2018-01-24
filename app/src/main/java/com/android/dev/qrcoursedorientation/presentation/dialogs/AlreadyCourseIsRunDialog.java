@@ -23,8 +23,8 @@ public class AlreadyCourseIsRunDialog {
         alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                CourseManager.getCourseList().remove(CourseManager.getCurrentCourse());
                 CheckPointManager.cleanCheckpointManager();
+                CourseManager.getCourseList().remove(CourseManager.getCurrentCourse());
                 Intent intent = new Intent(context,BaseActivity.class);
                 context.startActivity(intent);
             }

@@ -43,6 +43,7 @@ public class CheckPointManager {
     private static boolean run = false;
 
     public static void setRun(boolean run) {
+        Log.d( "setRun: ","");
         CheckPointManager.run = run;
     }
 

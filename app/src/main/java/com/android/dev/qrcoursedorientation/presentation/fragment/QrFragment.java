@@ -81,7 +81,6 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
 
         if(CheckPointManager.createCheckPoint(this.getContext(),rawResult.getText())){
             if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
-                CheckPointManager.setTimeStampBase(0);
                 listener.startChrono("start chrono");
             }
             CourseManager.createCourse(this.getContext(), rawResult.getText(),CheckPointManager.getTimeStampBase(),"12");

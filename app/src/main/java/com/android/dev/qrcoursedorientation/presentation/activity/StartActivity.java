@@ -53,6 +53,7 @@ public class StartActivity extends AppCompatActivity {
             CheckPointManager.setRun(true);
         }else{
             buttonRestartCourse.setVisibility(View.INVISIBLE);
+            CheckPointManager.cleanCheckpointManager();
         }
 
         buttonCreateCourse.setOnClickListener(new View.OnClickListener() {

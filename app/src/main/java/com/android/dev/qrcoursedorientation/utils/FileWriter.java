@@ -3,6 +3,8 @@ package com.android.dev.qrcoursedorientation.utils;
 import android.os.Environment;
 import android.util.Log;
 
+import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.models.Course;
 
 import java.io.File;
