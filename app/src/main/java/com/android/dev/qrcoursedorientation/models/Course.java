@@ -92,12 +92,6 @@ public class Course implements Serializable{
         return date;
     }
 
-    public void setDate(Date date) {
-        date = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        this.date = formatter.format(date);
-    }
-
     @Override
     public String toString() {
         return "Course{" +

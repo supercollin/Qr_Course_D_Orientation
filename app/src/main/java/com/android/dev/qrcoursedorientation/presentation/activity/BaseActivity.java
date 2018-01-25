@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.IBinder;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
 import com.android.dev.qrcoursedorientation.presentation.transformers.ZoomOutPageTransformer;
 import com.android.dev.qrcoursedorientation.services.QrChronometer;
+import com.android.dev.qrcoursedorientation.utils.FileWriter;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -33,6 +35,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -99,7 +102,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         Intent intent = new Intent(this, QrChronometer.class);
         startService(intent);
         bindService(intent, mServiceConnection, Context.BIND_DEBUG_UNBIND);
-        Log.d("startChrono: ",CheckPointManager.getTimeStampBase()+"");
         final Thread t = new Thread() {
 
             @Override
@@ -114,9 +116,8 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                                     if (qrChronometer != null) {
                                         headerMessage.setText(qrChronometer.getTimestamp());
                                         CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
-                                        if(CheckPointManager.getTimeStampBase()!=0) {
-                                            CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
-                                        }
+                                        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
+                                        CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
                                     }
                                 }
                             });
@@ -190,5 +191,33 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         CheckPointManager.setLatitude(location.getLatitude());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            FileWriter.fileWriter(CourseManager.getCourseList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            FileWriter.fileWriter(CourseManager.getCourseList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        try {
+            FileWriter.fileWriter(CourseManager.getCourseList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -78,4 +78,11 @@ public class QrChronometer extends Service {
         }
     }
 
+    public void setTimeStampBase(long base){
+        if(base != 0){
+            QrChronometer.setBase(base);
+        }else{
+            QrChronometer.setBase(SystemClock.elapsedRealtime());
+        }
+    }
 }

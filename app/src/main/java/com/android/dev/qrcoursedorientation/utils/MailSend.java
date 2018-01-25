@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 
 /**
  * Created by Guillaume Colletaz on 22/01/2018.
@@ -11,8 +12,9 @@ import android.os.Environment;
 
 public class MailSend {
 
-    public static void sendResultMail(Context context, String mail, int dossardNum){
-        String filePath = Environment.getExternalStorageDirectory() + "/Course/2018-01-22-10-50.csv";
+    public static void sendResultMail(Context context, String mail, int dossardNum, String foldername){
+        String filePath = Environment.getExternalStorageDirectory() + "/Course/"+ foldername +".csv";
+        Log.d("sendResultMail: ",filePath);
         Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "Resultat Course dossard numero" + dossardNum);

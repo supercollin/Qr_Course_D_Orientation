@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.utils.MailSend;
 
 /**
@@ -22,7 +23,7 @@ public class MailDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                MailSend.sendResultMail(context,"guillaume.colletaz01@gmail.com",12);
+                MailSend.sendResultMail(context,CourseManager.getCurrentCourse().getMailOrganizer(),12, CourseManager.getCurrentCourse().getDate());
             }
         }) ;
         alertDialog.setCancelable(false);

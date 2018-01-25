@@ -59,7 +59,7 @@ public class CourseManager {
         if (matchFound && matcher.groupCount() >= 1) {
             if (Objects.equals(matcher.group(2), "start")) {
                 mail = matcher.group(3);
-                course = new Course("start",0,mail,idRunner);
+                course = new Course("start",timeStamp,mail,idRunner);
                 setCourseList(course);
                 checkpoint = CheckPointManager.getLastCheckpoint();
                 getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);

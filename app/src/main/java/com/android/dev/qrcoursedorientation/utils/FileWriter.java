@@ -3,6 +3,8 @@ package com.android.dev.qrcoursedorientation.utils;
 import android.os.Environment;
 import android.util.Log;
 
+import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.models.Course;
 
 import java.io.File;
@@ -24,7 +26,6 @@ public class FileWriter {
         }
         File file = new File(directory, "CourseList.ser");
         file.createNewFile();
-        Log.d("fileWriter: ",Environment.getDataDirectory().getPath());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
         objectOutputStream.writeObject(courses);
         objectOutputStream.close();

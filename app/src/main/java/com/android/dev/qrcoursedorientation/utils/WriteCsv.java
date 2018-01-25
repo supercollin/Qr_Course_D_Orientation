@@ -21,7 +21,7 @@ public class WriteCsv {
 
         Date date;
         date = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String folderName = formatter.format(date);
 
         final File path = new File(Environment.getExternalStorageDirectory() + "/Course/");
