@@ -80,16 +80,16 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         mScannerView.resumeCameraPreview(this);
 
         if(CheckPointManager.createCheckPoint(this.getContext(),rawResult.getText())){
-            if(CheckPointManager.getCheckpointList().size() == 1 && CheckPointManager.isRun()) {
+            if(CheckPointManager.getCheckpointList().size() == 1) {
                 listener.startChrono("start chrono");
             }
+            Log.d( "handleResult: ",CourseManager.getCourseList().toString());
             CourseManager.createCourse(this.getContext(), rawResult.getText(),CheckPointManager.getTimeStampBase(),"12");
             try {
                 FileWriter.fileWriter(CourseManager.getCourseList());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Log.d( "handleResult: ",CourseManager.getCourseList().toString());
         }
         vibrator.vibrate(100);
 

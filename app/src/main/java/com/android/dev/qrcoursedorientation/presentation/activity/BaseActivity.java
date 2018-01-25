@@ -27,6 +27,7 @@ import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
 import com.android.dev.qrcoursedorientation.presentation.transformers.ZoomOutPageTransformer;
 import com.android.dev.qrcoursedorientation.services.QrChronometer;
+import com.android.dev.qrcoursedorientation.utils.FileWriter;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -34,6 +35,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -189,5 +191,33 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         CheckPointManager.setLatitude(location.getLatitude());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            FileWriter.fileWriter(CourseManager.getCourseList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            FileWriter.fileWriter(CourseManager.getCourseList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        try {
+            FileWriter.fileWriter(CourseManager.getCourseList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

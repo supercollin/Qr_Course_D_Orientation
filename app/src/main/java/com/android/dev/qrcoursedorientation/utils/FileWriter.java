@@ -26,7 +26,6 @@ public class FileWriter {
         }
         File file = new File(directory, "CourseList.ser");
         file.createNewFile();
-        Log.d("fileWriter: ",Environment.getDataDirectory().getPath());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
         objectOutputStream.writeObject(courses);
         objectOutputStream.close();

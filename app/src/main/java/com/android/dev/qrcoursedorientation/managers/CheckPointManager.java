@@ -97,8 +97,10 @@ public class CheckPointManager {
         if (matchFound && matcher.groupCount() >= 1) {
 
             if (Objects.equals(matcher.group(2), "start")) {
+
                 run = true;
                 tmp = new Checkpoint(matcher.group(1), "0:0:0", latitude, longitude);
+
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Scan réussi\nla course à commencé");
@@ -106,13 +108,18 @@ public class CheckPointManager {
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
+
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
+
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
                 checkpointList.add(tmp);
                 DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
                 result = true;
+
             } else if (Objects.equals(matcher.group(2), "end") && run) {
+
                 tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
+
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
@@ -121,6 +128,7 @@ public class CheckPointManager {
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
+
             }
 
         }else {
