@@ -1,21 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="56dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp">
+
+
+    <ImageView
+        android:id="@+id/tagIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_tag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/fragment_Qr_Checkpoint_List_textView_Id_Balise"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toEndOf="@id/tagIcon"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/chronometerIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:src="@drawable/ic_timer"
+        app:layout_constraintStart_toEndOf="@id/fragment_Qr_Checkpoint_List_textView_Id_Balise"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/fragment_Qr_Checkpoint_List_textView_Time"
-        android:layout_width="wrap_content"
+        android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@id/fragment_Qr_Checkpoint_List_textView_Id_Balise"
-        />
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toEndOf="@id/chronometerIcon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="16sp" />
+
 </android.support.constraint.ConstraintLayout>
