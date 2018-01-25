@@ -28,6 +28,12 @@ public class CourseManager {
         return courseList;
     }
 
+    public static String idRunner;
+
+    public static void setIdRunner(String idRunner) {
+        CourseManager.idRunner = idRunner;
+    }
+
     public static Course getCurrentCourse(){
 
         for (int i = 0; i<getCourseList().size(); i++){
@@ -46,7 +52,7 @@ public class CourseManager {
         CourseManager.courseList = courses;
     }
 
-    public static void createCourse(Context context, String qrResuult,long timeStamp, String idRunner){
+    public static void createCourse(Context context, String qrResuult,long timeStamp){
         String mail;
         Course course;
         Checkpoint checkpoint;

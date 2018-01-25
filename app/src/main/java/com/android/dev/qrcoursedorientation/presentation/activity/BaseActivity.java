@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.DossardNumDialog;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrCheckpointListFragment;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
@@ -71,6 +72,9 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         getCoord();
         if(CheckPointManager.isRun()){
             startChrono("start chrono");
+        }else{
+            DossardNumDialog dossardNumDialog =new DossardNumDialog();
+            dossardNumDialog.showDialog(this);
         }
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
