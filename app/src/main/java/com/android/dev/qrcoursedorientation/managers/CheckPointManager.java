@@ -121,10 +121,14 @@ public class CheckPointManager {
 
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
 
-                tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
-                checkpointList.add(tmp);
-                DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
-                result = true;
+                if (!Objects.equals(matcher.group(1), CheckPointManager.getLastCheckpoint().getIdBalise())) {
+                    tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
+                    checkpointList.add(tmp);
+                    DisplayToast.displayToast(context, "Le QrCode à bien été Scanné");
+                    result = true;
+                }else{
+                    CheckPointManager.getLastCheckpoint().setTime(timeStamp);
+                }
 
             } else if (Objects.equals(matcher.group(2), "end") && run) {
 
