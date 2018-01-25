@@ -42,6 +42,16 @@ public class CheckPointManager {
     private static double longitude;
     private static boolean run = false;
 
+    public static boolean isFirstimeChrono() {
+        return firstimeChrono;
+    }
+
+    public static void setFirstimeChrono(boolean firstimeChrono) {
+        CheckPointManager.firstimeChrono = firstimeChrono;
+    }
+
+    public static boolean firstimeChrono = false;
+
     public static void setRun(boolean run) {
         Log.d( "setRun: ","");
         CheckPointManager.run = run;
@@ -124,7 +134,6 @@ public class CheckPointManager {
                     checkpointList.add(tmp);
                     DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
                     result = true;
-                    CheckPointManager.setTimeStampBase(0);
                 }else {
                     DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
                 }
@@ -206,5 +215,6 @@ public class CheckPointManager {
         CheckPointManager.setRun(false);
         CheckPointManager.setTimeStampBase(0);
         CheckPointManager.setTimeStamp("0:0:0");
+        CheckPointManager.setFirstimeChrono(false);
     }
 }

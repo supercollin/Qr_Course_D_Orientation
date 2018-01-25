@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
+import com.android.dev.qrcoursedorientation.presentation.activity.StartActivity;
 import com.android.dev.qrcoursedorientation.utils.MailSend;
 
 /**
@@ -23,6 +25,9 @@ public class MailDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                CheckPointManager.setTimeStampBase(0);
+                Intent intent = new Intent(context, StartActivity.class);
+                context.startActivity(intent);
                 MailSend.sendResultMail(context,CourseManager.getCourseList().get(CourseManager.getCourseList().size()-1).getMailOrganizer(),CourseManager.idRunner, CourseManager.getCurrentCourse().getDate());
             }
         }) ;

@@ -42,7 +42,7 @@ public class DossardNumDialog {
             @Override
             public void onClick(View v) {
                 if(numDossard.getText().length()!=0) {
-                    d.dismiss();
+                    CheckPointManager.setTimeStampBase(0);
                     String dossard = numDossard.getText().toString();
                     CourseManager.setIdRunner(dossard);
                     d.dismiss();

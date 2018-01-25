@@ -42,12 +42,9 @@ public class StartActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.d("onCreate: ", CourseManager.getCurrentCourse().toString());
-
         if(Objects.equals(CourseManager.getCurrentCourse().getStatus(), "start")){
             buttonRestartCourse.setVisibility(View.VISIBLE);
             Course course = CourseManager.getCurrentCourse();
-            Log.d("onClick: ",course.toString());
             CheckPointManager.setCheckpointList(course.getCheckpointList());
             CheckPointManager.setTimeStampBase(course.getTimestamp());
             CheckPointManager.setRun(true);

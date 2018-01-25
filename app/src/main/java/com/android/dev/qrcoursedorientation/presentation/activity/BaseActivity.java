@@ -51,7 +51,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-    private Location location;
     QrChronometer qrChronometer;
     private boolean mServiceBound = false;
     private LocationRequest locationRequest;
@@ -59,6 +58,41 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
+
+    final Thread t = new Thread() {
+
+        @Override
+        public void run() {
+            while (!isInterrupted()) {
+                try {
+                    if (CheckPointManager.isRun()) {
+                        Thread.sleep(1000);  //1000ms = 1 sec
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (qrChronometer != null) {
+                                    if(CheckPointManager.isFirstimeChrono()){
+                                        CheckPointManager.setTimeStampBase(0);
+                                        qrChronometer.setTimeStampBase(CheckPointManager.getTimeStampBase());
+                                        headerMessage.setText(qrChronometer.getTimestamp());
+                                        CheckPointManager.setFirstimeChrono(false);
+                                    }else {
+                                        headerMessage.setText(qrChronometer.getTimestamp());
+                                        CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
+                                        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
+                                        CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
+                                    }
+                                }
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
 
     @BindView(R.id.textViewMessage)
     TextView headerMessage;
@@ -73,6 +107,8 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         if(CheckPointManager.isRun()){
             startChrono("start chrono");
         }else{
+            CheckPointManager.setTimeStampBase(0);
+            CheckPointManager.setFirstimeChrono(true);
             DossardNumDialog dossardNumDialog =new DossardNumDialog();
             dossardNumDialog.showDialog(this);
         }
@@ -106,34 +142,11 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         Intent intent = new Intent(this, QrChronometer.class);
         startService(intent);
         bindService(intent, mServiceConnection, Context.BIND_DEBUG_UNBIND);
-        final Thread t = new Thread() {
-
-            @Override
-            public void run() {
-                while (!isInterrupted()) {
-                    try {
-                        if (CheckPointManager.isRun()) {
-                            Thread.sleep(1000);  //1000ms = 1 sec
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (qrChronometer != null) {
-                                        headerMessage.setText(qrChronometer.getTimestamp());
-                                        CheckPointManager.setTimeStamp(qrChronometer.getTimestamp());
-                                        CheckPointManager.setTimeStampBase(qrChronometer.getTimeStampBase());
-                                        CourseManager.getCurrentCourse().setTimestamp(CheckPointManager.getTimeStampBase());
-                                    }
-                                }
-                            });
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-
         t.start();
+    }
+
+    public void stopChrono(){
+        t.interrupt();
     }
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -218,6 +231,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        qrChronometer.setTimeStampBase(0);
         try {
             FileWriter.fileWriter(CourseManager.getCourseList());
         } catch (IOException e) {

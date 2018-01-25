@@ -62,28 +62,37 @@ public class CourseManager {
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(qrResuult);
         boolean matchFound = matcher.find();
+
         if (matchFound && matcher.groupCount() >= 1) {
             if (Objects.equals(matcher.group(2), "start")) {
+
                 mail = matcher.group(3);
                 course = new Course("start",timeStamp,mail,idRunner);
                 setCourseList(course);
                 checkpoint = CheckPointManager.getLastCheckpoint();
                 getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);
+
             }else if (Objects.equals(matcher.group(2), "end")) {
                 for (int i = 0; i < getCourseList().size(); i++){
                     if (Objects.equals(getCourseList().get(i).getStatus(), "start")){
+
                         getCourseList().get(i).setStatus("stop");
                         checkpoint = CheckPointManager.getLastCheckpoint();
                         getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);
                         WriteCsv.writeCourse(CheckPointManager.listToString());
                         MailDialog mailDialog = new MailDialog();
                         mailDialog.showDialog(context);
+
                     }
                 }
+
                 CheckPointManager.cleanCheckpointManager();
+
             }else if (Objects.equals(matcher.group(2), "checkpoint")) {
+
                 checkpoint = CheckPointManager.getLastCheckpoint();
                 getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);
+
             }
         }
     }
