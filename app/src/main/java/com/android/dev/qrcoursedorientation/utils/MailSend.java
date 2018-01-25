@@ -14,7 +14,6 @@ public class MailSend {
 
     public static void sendResultMail(Context context, String mail, int dossardNum, String foldername){
         String filePath = Environment.getExternalStorageDirectory() + "/Course/"+ foldername +".csv";
-        Log.d("sendResultMail: ",filePath);
         Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "Resultat Course dossard numero" + dossardNum);
