@@ -3,6 +3,8 @@ package com.android.dev.qrcoursedorientation.utils;
 import android.os.Environment;
 import android.util.Log;
 
+import com.android.dev.qrcoursedorientation.managers.CourseManager;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,7 +24,7 @@ public class WriteCsv {
         Date date;
         date = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String folderName = formatter.format(date);
+        String folderName = formatter.format(date) + "_num_"+ CourseManager.idRunner;
 
         final File path = new File(Environment.getExternalStorageDirectory() + "/Course/");
         if(!path.exists())

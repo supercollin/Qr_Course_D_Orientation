@@ -77,7 +77,7 @@ public class CourseManager {
                         getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);
                         WriteCsv.writeCourse(CheckPointManager.listToString());
                         MailDialog mailDialog = new MailDialog();
-                        mailDialog.showDilaog(context);
+                        mailDialog.showDialog(context);
                     }
                 }
                 CheckPointManager.cleanCheckpointManager();
