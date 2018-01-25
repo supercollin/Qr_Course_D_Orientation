@@ -28,7 +28,7 @@ public class CreateCourseDialog{
 
     public void show()
     {
-        Log.d("show", "show: ");
+
         final Dialog d = new Dialog(context);
         d.setContentView(R.layout.create_course);
 

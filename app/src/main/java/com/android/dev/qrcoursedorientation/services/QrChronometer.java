@@ -17,8 +17,6 @@ import com.android.dev.qrcoursedorientation.managers.CourseManager;
 
 public class QrChronometer extends Service {
 
-    private static String LOG_TAG = "QrChronometerService";
-
     private IBinder mBinder = new MyBinder();
     private Chronometer QrChronometer;
 
@@ -51,7 +49,6 @@ public class QrChronometer extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.v(LOG_TAG, "Stop chronometer");
         QrChronometer.stop();
     }
 

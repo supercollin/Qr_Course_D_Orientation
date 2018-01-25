@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
@@ -15,12 +16,12 @@ import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
 
 public class AlreadyCourseIsRunDialog {
     public void showDialog(final Context context){
-        //locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
-        alertDialog.setMessage("Une course est déjà en cours cette action la suprimera");
-        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage(R.string.already_course_running);
+
+        alertDialog.setPositiveButton(R.string.validate_alertdialog, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 CheckPointManager.cleanCheckpointManager();
@@ -29,7 +30,7 @@ public class AlreadyCourseIsRunDialog {
                 context.startActivity(intent);
             }
         }) ;
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.cancel_alertdialog, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

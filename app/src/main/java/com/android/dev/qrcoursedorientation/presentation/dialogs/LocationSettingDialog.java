@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.provider.Settings;
 
+import com.android.dev.qrcoursedorientation.R;
+
 /**
  * Created by Guillaume Colletaz on 19/01/2018.
  */
@@ -18,17 +20,15 @@ public class LocationSettingDialog {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
-        alertDialog.setTitle("GPS SETTINGS");
-
-        alertDialog.setMessage("GPS is not enabled.Go to Settings menu and enable it?");
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage(R.string.gps_not_activated_dialog);
+        alertDialog.setPositiveButton(R.string.go_to_setting, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 context.startActivity(intent);
             }
         }) ;
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.cancel_alertdialog, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

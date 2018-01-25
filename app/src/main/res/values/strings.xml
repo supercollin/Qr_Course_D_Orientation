@@ -9,4 +9,25 @@
     <!-- fragments management -->
     <string name="qr_view">qrView</string>
     <string name="qr_checkpoint_list_view">qrCheckpointListView</string>
+    <string name="chrono_zero">0:0:0</string>
+    <string name="scan_start_run">Scan réussi la course à commencé</string>
+    <string name="scan_bad_format">Le QrCode à déjà été Scanné</string>
+    <string name="scan_good_format">Le QrCode à bien été Scanné</string>
+    <string name="scan_not_in_course">Le QrCode n\'est pas au bon format</string>
+    <string name="qrcode_create">Les QrCode ont tous été créer</string>
+    <string name="path_qrcode">/QrCode/</string>
+    <string name="csv_col_checkpointId">Balise,</string>
+    <string name="csv_col_temp">Temp,</string>
+    <string name="csv_col_lat">Latitude,</string>
+    <string name="csv_col_long">Longitude</string>
+    <string name="qr_date_format">dd-MM-yyyy-hh-mm</string>
+    <string name="already_course_running">Une course est déjà en cours cette action la suprimera</string>
+    <string name="validate_alertdialog">Ok</string>
+    <string name="cancel_alertdialog">Cancel</string>
+    <string name="gps_not_activated_dialog">GPS is not enabled.Go to Settings menu and enable it?</string>
+    <string name="go_to_setting">Settings</string>
+    <string name="maildialog_text">Un mail avec les résultat de la course va être envoyer à l\'utilisateur</string>
+    <string name="maildialog_qr_text">Un mail avec les QrCodes générés vont vous être envoyé</string>
+    <string name="object_mail_result">Resultat Course dossard numero </string>
+    <string name="object_mail_qr">Qrcode de la course d\'orientation</string>
 </resources>

@@ -3,8 +3,10 @@ package com.android.dev.qrcoursedorientation.managers;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 
+import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.models.Course;
 import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
@@ -53,7 +55,6 @@ public class CheckPointManager {
     public static boolean firstimeChrono = false;
 
     public static void setRun(boolean run) {
-        Log.d( "setRun: ","");
         CheckPointManager.run = run;
     }
 
@@ -113,10 +114,10 @@ public class CheckPointManager {
 
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
-                    DisplayToast.displayToast(context,"Scan réussi\nla course à commencé");
+                    DisplayToast.displayToast(context,context.getString(R.string.scan_start_run));
                     result = true;
                 }else {
-                    DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
+                    DisplayToast.displayToast(context, context.getString(R.string.scan_bad_format));
                 }
 
             } else if (Objects.equals(matcher.group(2), "checkpoint") && run) {
@@ -124,7 +125,7 @@ public class CheckPointManager {
                 if (!Objects.equals(matcher.group(1), CheckPointManager.getLastCheckpoint().getIdBalise())) {
                     tmp = new Checkpoint(matcher.group(1), timeStamp, latitude, longitude);
                     checkpointList.add(tmp);
-                    DisplayToast.displayToast(context, "Le QrCode à bien été Scanné");
+                    DisplayToast.displayToast(context, context.getString(R.string.scan_good_format));
                     result = true;
                 }else{
                     CheckPointManager.getLastCheckpoint().setTime(timeStamp);
@@ -136,16 +137,16 @@ public class CheckPointManager {
 
                 if(!containInList(tmp)) {
                     checkpointList.add(tmp);
-                    DisplayToast.displayToast(context,"Le QrCode à bien été Scanné");
+                    DisplayToast.displayToast(context,context.getString(R.string.scan_good_format));
                     result = true;
                 }else {
-                    DisplayToast.displayToast(context, "Le QrCode à déjà été Scanné");
+                    DisplayToast.displayToast(context, context.getString(R.string.scan_bad_format));
                 }
 
             }
 
         }else {
-            DisplayToast.displayToast(context, "Le QrCode n'est pas au bon format");
+            DisplayToast.displayToast(context, context.getString(R.string.scan_not_in_course));
         }
         return result;
     }
@@ -167,7 +168,7 @@ public class CheckPointManager {
 
         Date date;
         date = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-hh-mm");
+        SimpleDateFormat formatter = new SimpleDateFormat(context.getString(R.string.qr_date_format));
         String folderName = formatter.format(date);
 
         Bitmap QR;
@@ -182,20 +183,20 @@ public class CheckPointManager {
         QR = QrConverter.TextToImageEncode("#Arrivé#end#",500);
         QrConverter.saveImage(context,"end",0,QR,folderName);
 
-        QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName, Environment.getExternalStorageDirectory()+ "/QrCode/"+folderName+".zip");
+        QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName, Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName+folderName+".zip");
 
-        DisplayToast.displayToast(context,"Les QrCode ont tous été créer");
+        DisplayToast.displayToast(context,context.getString(R.string.qrcode_create));
 
         MailQrDialog mailQrDialog = new MailQrDialog();
         mailQrDialog.showDilaog(context, mail, folderName);
     }
 
-    public static String listToString(){
+    public static String listToString(Context context){
         StringBuilder checkpointToCSV = new StringBuilder();
-        checkpointToCSV.append("Balise,");
-        checkpointToCSV.append("Temp,");
-        checkpointToCSV.append("Latitude,");
-        checkpointToCSV.append("Longitude\n");
+        checkpointToCSV.append(context.getString(R.string.csv_col_checkpointId));
+        checkpointToCSV.append(context.getString(R.string.csv_col_temp));
+        checkpointToCSV.append(context.getString(R.string.csv_col_lat));
+        checkpointToCSV.append(context.getString(R.string.csv_col_long));
         for (Checkpoint checkpoint: checkpointList) {
             checkpointToCSV.append(checkpoint.getIdBalise());
             checkpointToCSV.append(',');

@@ -28,7 +28,7 @@ public class DossardNumDialog {
 
     public void showDialog(final Context context)
     {
-        Log.d("show", "show: ");
+
         final Dialog d = new Dialog(context);
         d.setContentView(R.layout.run_dialog);
 

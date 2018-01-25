@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.presentation.activity.StartActivity;
@@ -20,8 +21,8 @@ import com.android.dev.qrcoursedorientation.utils.MailSend;
 public class MailDialog {
     public void showDialog(final Context context){
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-        alertDialog.setMessage("Un mail avec les résultat de la course va être envoyer à l'utilisateur");
-        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage(R.string.maildialog_text);
+        alertDialog.setPositiveButton(R.string.validate_alertdialog, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

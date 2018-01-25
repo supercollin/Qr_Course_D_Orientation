@@ -79,7 +79,7 @@ public class CourseManager {
                         getCourseList().get(i).setStatus("stop");
                         checkpoint = CheckPointManager.getLastCheckpoint();
                         getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);
-                        WriteCsv.writeCourse(CheckPointManager.listToString());
+                        WriteCsv.writeCourse(CheckPointManager.listToString(context));
                         MailDialog mailDialog = new MailDialog();
                         mailDialog.showDialog(context);
 
