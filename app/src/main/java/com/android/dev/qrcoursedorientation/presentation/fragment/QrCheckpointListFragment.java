@@ -49,6 +49,7 @@ public class QrCheckpointListFragment extends Fragment implements QrCheckpointLi
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("UPDATE_DATA"));
 
 
+
         return view;
     }
 
@@ -63,6 +64,13 @@ public class QrCheckpointListFragment extends Fragment implements QrCheckpointLi
         super.onViewCreated(view, savedInstanceState);
 
         initRecyclerView();
+        List<Checkpoint> checkpointList = CheckPointManager.getCheckpointList();
+        List<QrCheckpointViewModel> qrCheckpointViewModels = new ArrayList<>();
+        for(int i=0; i < checkpointList.size(); i++){
+            qrCheckpointViewModels.add(new QrCheckpointViewModel(checkpointList.get(i)));
+        }
+
+        updateList(qrCheckpointViewModels);
 
     }
 

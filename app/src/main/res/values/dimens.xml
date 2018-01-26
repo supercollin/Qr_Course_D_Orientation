@@ -3,5 +3,23 @@
 
     <dimen name="card_padding">28dp</dimen>
 
+    <!-- MARGIN !-->
+    <dimen name="margin">16dp</dimen>
+    <dimen name="margin_middle">32dp</dimen>
+    <dimen name="margin_large">64dp</dimen>
+
+    <!-- PADDING !-->
+    <dimen name="padding">16dp</dimen>
+
+    <!-- WIDTH !-->
+    <dimen name="width_large">60dp</dimen>
+    <dimen name="width_extra_large">72dp</dimen>
+
+    <!-- HEIGHT !-->
+    <dimen name="height">32dp</dimen>
+    <dimen name="height_large">60dp</dimen>
+
+    <!-- SIZE !-->
+    <dimen name="text_size">16sp</dimen>
 
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QR Course d\'orientation</string>
+    <string name="app_name">QR COURSE D\'ORIENTATION</string>
 
 
 
@@ -33,4 +33,7 @@
     <string name="toast_no_course">Vous n\'avez pas participé à une course pour l\'instant !</string>
     <string name="id_start_qrcode">Depart</string>
     <string name="id_end_qrcode">fin</string>
+
+    <string name="start_activity_title">QR COURSE D\'ORIENTATION</string>
+    <string name="chronicle_activity_title">MES COURSES</string>
 </resources>

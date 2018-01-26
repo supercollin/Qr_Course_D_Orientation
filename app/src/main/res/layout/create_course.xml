@@ -1,82 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingRight="@dimen/padding"
+    android:paddingLeft="@dimen/padding"
+    android:paddingTop="@dimen/padding"
+    android:paddingBottom="@dimen/padding">
+
 
     <Button
         android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height"
         android:layout_below="@+id/numberOfCheckpoint"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="70dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="@dimen/margin"
         android:text="annuler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/button_cancel_shape"
+        android:foreground="?attr/selectableItemBackground"
+        android:textColor="#FFF"
+        app:layout_constraintTop_toBottomOf="@id/validate" />
 
     <Button
         android:id="@+id/validate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/cancel"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/button_validate_shape"
+        android:foreground="?attr/selectableItemBackground"
+        android:textColor="#FFF"
         android:text="valider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/numberOfCheckpoint" />
 
     <EditText
         android:id="@+id/numberOfCheckpoint"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/validate"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
-        android:ems="10"
         android:inputType="number"
         android:maxLength="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewNumber"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/mail"
+        android:hint="Nombre de balise"/>
 
     <EditText
         android:id="@+id/mail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/validate"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="32dp"
-        android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewMail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="Email de l'organisateur"/>
 
-    <TextView
-        android:id="@+id/textViewMail"
-        android:layout_width="71dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="mail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewNumber"
-        android:layout_width="71dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="nombre de balise"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMail" />
 
 </android.support.constraint.ConstraintLayout>

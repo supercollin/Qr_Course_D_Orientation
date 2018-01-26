@@ -10,15 +10,15 @@
     <TextView
         android:id="@+id/textViewMessage"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/height_large"
         android:text="0:0:0"
         android:gravity="center"
         />
 
     <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/flash_icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/width_large"
+        android:layout_height="@dimen/height_large"
         android:src="@drawable/ic_flash_on"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="1:1"
@@ -28,7 +28,7 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="@dimen/margin_large">
     </android.support.v4.view.ViewPager>
 
 

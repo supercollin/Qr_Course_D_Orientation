@@ -23,6 +23,7 @@ public class ChronicleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chronicle);
+        this.setTitle(R.string.chronicle_activity_title);
         mViewPager = findViewById(R.id.viewPager);
 
         mFragmentCardAdapter = new CourseCardFragmentAdapter(getSupportFragmentManager(),
