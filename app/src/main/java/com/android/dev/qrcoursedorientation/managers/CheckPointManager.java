@@ -183,7 +183,7 @@ public class CheckPointManager {
         QR = QrConverter.TextToImageEncode("#"+context.getString(R.string.id_end_qrcode)+"#end#",500);
         QrConverter.saveImage(context,"end",0,QR,folderName);
 
-        QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName, Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName+folderName+".zip");
+        QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName, Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName+".zip");
 
         DisplayToast.displayToast(context,context.getString(R.string.qrcode_create));
 
