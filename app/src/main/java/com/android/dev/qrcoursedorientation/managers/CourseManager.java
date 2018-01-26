@@ -1,11 +1,15 @@
 package com.android.dev.qrcoursedorientation.managers;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.SystemClock;
 import android.util.Log;
 
 import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.models.Course;
+import com.android.dev.qrcoursedorientation.presentation.activity.BaseActivity;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.InternetSettingsDialog;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.MailDialog;
 import com.android.dev.qrcoursedorientation.utils.WriteCsv;
 
@@ -82,6 +86,10 @@ public class CourseManager {
                         WriteCsv.writeCourse(CheckPointManager.listToString(context));
                         MailDialog mailDialog = new MailDialog();
                         mailDialog.showDialog(context);
+                        if(!CourseManager.isConnected(context)){
+                            InternetSettingsDialog internetSettingsDialog = new InternetSettingsDialog();
+                            internetSettingsDialog.showDialog(context);
+                        }
 
                     }
                 }
@@ -95,5 +103,13 @@ public class CourseManager {
 
             }
         }
+    }
+
+    public static boolean isConnected(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        return connected;
     }
 }

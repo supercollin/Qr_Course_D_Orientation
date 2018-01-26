@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -23,6 +26,8 @@ import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.DossardNumDialog;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.InternetSettingsDialog;
+import com.android.dev.qrcoursedorientation.presentation.dialogs.LocationSettingDialog;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrCheckpointListFragment;
 import com.android.dev.qrcoursedorientation.presentation.fragment.QrFragment;
 import com.android.dev.qrcoursedorientation.presentation.adapter.PagerAdapter;
@@ -72,6 +77,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                             public void run() {
                                 if (qrChronometer != null) {
                                     if(CheckPointManager.isFirstimeChrono()){
+                                        Log.d( "run: ","a");
                                         CheckPointManager.setTimeStampBase(0);
                                         qrChronometer.setTimeStampBase(CheckPointManager.getTimeStampBase());
                                         headerMessage.setText(qrChronometer.getTimestamp());
@@ -93,7 +99,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
         }
     };
 
-
     @BindView(R.id.textViewMessage)
     TextView headerMessage;
 
@@ -112,6 +117,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             DossardNumDialog dossardNumDialog =new DossardNumDialog();
             dossardNumDialog.showDialog(this);
         }
+        positionActivated();
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List<Fragment> fragments = new Vector<>();
@@ -231,11 +237,22 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        qrChronometer.setTimeStampBase(0);
+        if(qrChronometer!=null) {
+            qrChronometer.setTimeStampBase(0);
+        }
         try {
             FileWriter.fileWriter(CourseManager.getCourseList());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void positionActivated(){
+        LocationManager locManager;
+        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            LocationSettingDialog locationSettingDialog = new LocationSettingDialog();
+            locationSettingDialog.showDialog(this);
         }
     }
 }
