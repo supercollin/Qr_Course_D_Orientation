@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_large"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding"
+    android:paddingRight="@dimen/padding">
+
+
+    <ImageView
+        android:id="@+id/tagIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_tag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/fragment_Qr_Checkpoint_List_textView_Id_Balise"
+        android:layout_width="@dimen/width_extra_large"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="@dimen/margin"
+        app:layout_constraintStart_toEndOf="@id/tagIcon"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/chronometerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_timer"
+        app:layout_constraintStart_toEndOf="@id/fragment_Qr_Checkpoint_List_textView_Id_Balise"
+        android:layout_marginLeft="@dimen/margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/fragment_Qr_Checkpoint_List_textView_Time"
+        android:layout_width="@dimen/width_extra_large"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        app:layout_constraintStart_toEndOf="@id/chronometerIcon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/text_size" />
+
+</android.support.constraint.ConstraintLayout>

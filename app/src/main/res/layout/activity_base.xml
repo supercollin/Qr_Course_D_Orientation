@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.activity.BaseActivity"
+    android:background="@drawable/chronicle_background">
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_large"
+        android:textSize="@dimen/text_size_large"
+        android:text="@string/init_timer"
+        android:gravity="center"
+        />
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:id="@+id/flash_icon"
+        android:layout_width="@dimen/width_large"
+        android:layout_height="@dimen/height_large"
+        android:src="@drawable/ic_flash_on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        android:background="@android:color/transparent"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_large">
+    </android.support.v4.view.ViewPager>
+
+
+</android.support.constraint.ConstraintLayout>

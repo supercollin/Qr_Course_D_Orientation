@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">COURSE D\'ORIENTATION</string>
+
+
+
+    <!-- fragments management -->
+    <string name="qr_view">qrView</string>
+    <string name="qr_checkpoint_list_view">qrCheckpointListView</string>
+
+
+    <string name="chrono_zero">0:0:0</string>
+    <string name="scan_start_run">Scan réussi,\n la course à commencé</string>
+    <string name="scan_bad_format">Le QrCode a déjà été Scanné</string>
+    <string name="scan_good_format">Le QrCode a bien été Scanné</string>
+    <string name="scan_not_in_course">Le QrCode n\'est pas au bon format</string>
+    <string name="qrcode_create">Les QrCodes ont tous été créé</string>
+    <string name="path_qrcode">/QrCode/</string>
+    <string name="csv_col_checkpointId">Balise,</string>
+    <string name="csv_col_temp">Temp,</string>
+    <string name="csv_col_lat">Latitude,</string>
+    <string name="csv_col_long">Longitude\n</string>
+    <string name="qr_date_format">dd-MM-yyyy-hh-mm</string>
+    <string name="already_course_running">Une course est déjà en cours, cette action va la suprimer</string>
+    <string name="validate_alertdialog">Ok</string>
+    <string name="cancel_alertdialog">Annuler</string>
+    <string name="gps_not_activated_dialog">Course d\'orientation a besoin de votre position pour fonctionner correctement</string>
+    <string name="go_to_setting">Paramètres</string>
+    <string name="maildialog_text">Nous préparons un mail avec vos résultats, veuillez valider son envoi</string>
+    <string name="maildialog_qr_text">Nous préparons un mail avec les QrCodes générés, veuillez valider son envoi</string>
+    <string name="object_mail_result">Resultat de la course, dossard numero: </string>
+    <string name="object_mail_qr">QrCodes de la course d\'orientation du </string>
+    <string name="settings_internet_dialog">Course d\'orientation a besoin d\'accéder à internet pour fonctionner correctement</string>
+    <string name="toast_no_course">Vous n\'avez participé à aucune course pour l\'instant !</string>
+    <string name="id_start_qrcode">Depart</string>
+    <string name="id_end_qrcode">Fin</string>
+
+    <string name="start_activity_title">COURSE D\'ORIENTATION</string>
+    <string name="chronicle_activity_title">MES COURSES</string>
+    <string name="init_timer">0:0:0</string>
+    <string name="text_restart_button">Reprendre une course</string>
+    <string name="text_run_button">Lancer une course</string>
+    <string name="text_chronicle_button">Mes courses</string>
+    <string name="text_create_button">Créer un parcours</string>
+    <string name="text_cancel_button">Annuler</string>
+    <string name="text_validate_button">Valider</string>
+    <string name="hint_edittext_number_of_checkpoint">Nombre de balises</string>
+    <string name="hint_edit_text_mail">Email de l\'organisateur</string>
+    <string name="hint_edit_text_id_runner">Numéro de dossard du coureur</string>
+</resources>

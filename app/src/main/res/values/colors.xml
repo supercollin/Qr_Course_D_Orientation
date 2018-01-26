@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#c2863a</color>
+    <color name="colorPrimaryDark">#ba7722</color>
+    <color name="colorAccent">#32A623</color>
+    <color name="cancelButton">#A5371B</color>
+    <color name="validateButton">#188906</color>
+
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+</resources>
