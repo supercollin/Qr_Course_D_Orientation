@@ -11,7 +11,8 @@
         android:id="@+id/textViewMessage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_large"
-        android:text="0:0:0"
+        android:textSize="@dimen/text_size_large"
+        android:text="@string/init_timer"
         android:gravity="center"
         />
 

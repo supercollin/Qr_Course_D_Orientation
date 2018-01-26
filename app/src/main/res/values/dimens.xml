@@ -19,7 +19,8 @@
     <dimen name="height">32dp</dimen>
     <dimen name="height_large">60dp</dimen>
 
-    <!-- SIZE !-->
+    <!-- TEXTSIZE !-->
     <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size_large">32sp</dimen>
 
 </resources>

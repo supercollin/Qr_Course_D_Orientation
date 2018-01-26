@@ -36,4 +36,14 @@
 
     <string name="start_activity_title">QR COURSE D\'ORIENTATION</string>
     <string name="chronicle_activity_title">MES COURSES</string>
+    <string name="init_timer">0:0:0</string>
+    <string name="text_restart_button">Reprendre une course</string>
+    <string name="text_run_button">Lancer une course</string>
+    <string name="text_chronicle_button">Mes courses</string>
+    <string name="text_create_button">Créer un parcours</string>
+    <string name="text_cancel_button">annuler</string>
+    <string name="text_validate_button">valider</string>
+    <string name="hint_edittext_number_of_checkpoint">Nombre de balise</string>
+    <string name="hint_edit_text_mail">Email de l\'organisateur</string>
+    <string name="hint_edit_text_id_runner">Numéro de dossard du coureur</string>
 </resources>

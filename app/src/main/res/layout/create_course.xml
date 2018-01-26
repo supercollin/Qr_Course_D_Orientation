@@ -16,7 +16,7 @@
         android:layout_below="@+id/numberOfCheckpoint"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin"
-        android:text="annuler"
+        android:text="@string/text_cancel_button"
         android:background="@drawable/button_cancel_shape"
         android:foreground="?attr/selectableItemBackground"
         android:textColor="#FFF"
@@ -32,7 +32,7 @@
         android:background="@drawable/button_validate_shape"
         android:foreground="?attr/selectableItemBackground"
         android:textColor="#FFF"
-        android:text="valider"
+        android:text="@string/text_validate_button"
         app:layout_constraintTop_toBottomOf="@+id/numberOfCheckpoint" />
 
     <EditText
@@ -42,7 +42,7 @@
         android:inputType="number"
         android:maxLength="2"
         app:layout_constraintTop_toBottomOf="@id/mail"
-        android:hint="Nombre de balise"/>
+        android:hint="@string/hint_edittext_number_of_checkpoint"/>
 
     <EditText
         android:id="@+id/mail"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         app:layout_constraintTop_toTopOf="parent"
-        android:hint="Email de l'organisateur"/>
+        android:hint="@string/hint_edit_text_mail"/>
 
 
 
