@@ -172,7 +172,7 @@ public class CheckPointManager {
         String folderName = formatter.format(date);
 
         Bitmap QR;
-        QR = QrConverter.TextToImageEncode("#Depart#start#"+mail,500);
+        QR = QrConverter.TextToImageEncode("#"+context.getString(R.string.id_start_qrcode)+"#start#"+mail,500);
         QrConverter.saveImage(context,"start",0,QR,folderName);
 
         for (int i = 1; i<=number; i++) {
@@ -180,7 +180,7 @@ public class CheckPointManager {
             QrConverter.saveImage(context, "checkpoint", i, QR, folderName);
         }
 
-        QR = QrConverter.TextToImageEncode("#Arrivé#end#",500);
+        QR = QrConverter.TextToImageEncode("#"+context.getString(R.string.id_end_qrcode)+"#end#",500);
         QrConverter.saveImage(context,"end",0,QR,folderName);
 
         QrConverter.zipFolder(Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName, Environment.getExternalStorageDirectory()+ context.getString(R.string.path_qrcode)+folderName+folderName+".zip");

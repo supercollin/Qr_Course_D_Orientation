@@ -18,7 +18,7 @@
     <string name="csv_col_checkpointId">Balise,</string>
     <string name="csv_col_temp">Temp,</string>
     <string name="csv_col_lat">Latitude,</string>
-    <string name="csv_col_long">Longitude</string>
+    <string name="csv_col_long">Longitude\n</string>
     <string name="qr_date_format">dd-MM-yyyy-hh-mm</string>
     <string name="already_course_running">Une course est déjà en cours cette action la suprimera</string>
     <string name="validate_alertdialog">Ok</string>
@@ -31,4 +31,6 @@
     <string name="object_mail_qr">Qrcode de la course d\'orientation</string>
     <string name="settings_internet_dialog">Internet n\'est pas activé, veuillez le faire</string>
     <string name="toast_no_course">Vous n\'avez pas participé à une course pour l\'instant !</string>
+    <string name="id_start_qrcode">Depart</string>
+    <string name="id_end_qrcode">fin</string>
 </resources>
