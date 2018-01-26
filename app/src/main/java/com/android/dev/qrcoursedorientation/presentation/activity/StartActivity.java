@@ -51,6 +51,7 @@ public class StartActivity extends AppCompatActivity {
         if(Objects.equals(CourseManager.getCurrentCourse().getStatus(), "start")){
             buttonRestartCourse.setVisibility(View.VISIBLE);
             Course course = CourseManager.getCurrentCourse();
+            CourseManager.setIdRunner(course.getIdRunner());
             CheckPointManager.setCheckpointList(course.getCheckpointList());
             CheckPointManager.setTimeStampBase(course.getTimestamp());
             CheckPointManager.setRun(true);

@@ -83,7 +83,6 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
                             public void run() {
                                 if (qrChronometer != null) {
                                     if(CheckPointManager.isFirstimeChrono()){
-                                        Log.d( "run: ","a");
                                         CheckPointManager.setTimeStampBase(0);
                                         qrChronometer.setTimeStampBase(CheckPointManager.getTimeStampBase());
                                         headerMessage.setText(qrChronometer.getTimestamp());

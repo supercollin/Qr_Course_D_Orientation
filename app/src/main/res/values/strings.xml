@@ -27,7 +27,7 @@
     <string name="go_to_setting">Settings</string>
     <string name="maildialog_text">Un mail avec les résultat de la course va être envoyer à l\'utilisateur</string>
     <string name="maildialog_qr_text">Un mail avec les QrCodes générés vont vous être envoyé</string>
-    <string name="object_mail_result">Resultat Course dossard numero </string>
+    <string name="object_mail_result">Resultat Course dossard numero: </string>
     <string name="object_mail_qr">Qrcode de la course d\'orientation</string>
     <string name="settings_internet_dialog">Internet n\'est pas activé, veuillez le faire</string>
     <string name="toast_no_course">Vous n\'avez pas participé à une course pour l\'instant !</string>
