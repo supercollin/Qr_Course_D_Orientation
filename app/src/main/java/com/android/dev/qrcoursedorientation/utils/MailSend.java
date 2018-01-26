@@ -2,6 +2,8 @@ package com.android.dev.qrcoursedorientation.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
