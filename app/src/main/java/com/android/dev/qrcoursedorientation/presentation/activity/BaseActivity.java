@@ -245,9 +245,7 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(qrChronometer!=null) {
-            qrChronometer.setTimeStampBase(0);
-        }
+        CheckPointManager.setRun(false);
         try {
             FileWriter.fileWriter(CourseManager.getCourseList());
         } catch (IOException e) {

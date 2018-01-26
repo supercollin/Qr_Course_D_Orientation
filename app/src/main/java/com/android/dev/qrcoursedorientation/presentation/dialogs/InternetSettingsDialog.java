@@ -14,7 +14,6 @@ import com.android.dev.qrcoursedorientation.R;
 
 public class InternetSettingsDialog {
     public void showDialog(final Context context){
-        //locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
