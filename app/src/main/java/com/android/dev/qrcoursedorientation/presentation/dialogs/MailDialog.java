@@ -22,6 +22,7 @@ public class MailDialog {
     public void showDialog(final Context context){
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setMessage(R.string.maildialog_text);
+
         alertDialog.setPositiveButton(R.string.validate_alertdialog, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

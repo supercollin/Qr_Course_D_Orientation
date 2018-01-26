@@ -79,10 +79,7 @@ public class CourseManager {
             }else if (Objects.equals(matcher.group(2), "end")) {
                 for (int i = 0; i < getCourseList().size(); i++){
                     if (Objects.equals(getCourseList().get(i).getStatus(), "start")){
-
                         getCourseList().get(i).setStatus("stop");
-                        checkpoint = CheckPointManager.getLastCheckpoint();
-                        getCourseList().get(getCourseList().size()-1).getCheckpointList().add(checkpoint);
                         WriteCsv.writeCourse(CheckPointManager.listToString(context));
                         MailDialog mailDialog = new MailDialog();
                         mailDialog.showDialog(context);
