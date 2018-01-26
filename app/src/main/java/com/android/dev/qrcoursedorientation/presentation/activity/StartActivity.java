@@ -12,6 +12,7 @@ import com.android.dev.qrcoursedorientation.R;
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
 import com.android.dev.qrcoursedorientation.models.Course;
+import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.AlreadyCourseIsRunDialog;
 import com.android.dev.qrcoursedorientation.presentation.dialogs.CreateCourseDialog;
 import com.android.dev.qrcoursedorientation.utils.FileReader;
@@ -82,8 +83,12 @@ public class StartActivity extends AppCompatActivity {
         buttonChronicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartActivity.this,ChronicleActivity.class);
-                startActivity(intent);
+                if(CourseManager.getCourseList().size()>0) {
+                    Intent intent = new Intent(StartActivity.this, ChronicleActivity.class);
+                    startActivity(intent);
+                }else{
+                    DisplayToast.displayToast(getBaseContext(),getString(R.string.toast_no_course));
+                }
             }
         });
 

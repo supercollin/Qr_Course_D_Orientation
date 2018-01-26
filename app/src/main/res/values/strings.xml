@@ -2,13 +2,12 @@
     <string name="app_name">QR Course d\'orientation</string>
 
 
-    <string name="title_1">Cool card</string>
-    <string name="title_2">Ok card</string>
-    <string name="title_3">Bad card</string>
-    <string name="title_4">Ugly card</string>
+
     <!-- fragments management -->
     <string name="qr_view">qrView</string>
     <string name="qr_checkpoint_list_view">qrCheckpointListView</string>
+
+
     <string name="chrono_zero">0:0:0</string>
     <string name="scan_start_run">Scan réussi la course à commencé</string>
     <string name="scan_bad_format">Le QrCode à déjà été Scanné</string>
@@ -31,4 +30,5 @@
     <string name="object_mail_result">Resultat Course dossard numero </string>
     <string name="object_mail_qr">Qrcode de la course d\'orientation</string>
     <string name="settings_internet_dialog">Internet n\'est pas activé, veuillez le faire</string>
+    <string name="toast_no_course">Vous n\'avez pas participé à une course pour l\'instant !</string>
 </resources>

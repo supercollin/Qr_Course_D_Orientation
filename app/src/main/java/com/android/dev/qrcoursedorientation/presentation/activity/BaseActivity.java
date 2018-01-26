@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -17,9 +18,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.dev.qrcoursedorientation.R;
@@ -48,6 +51,7 @@ import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
@@ -60,6 +64,8 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
     private boolean mServiceBound = false;
     private LocationRequest locationRequest;
     private List<Double> coord = new ArrayList<>();
+
+    private boolean flash = false;
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
@@ -101,6 +107,8 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
 
     @BindView(R.id.textViewMessage)
     TextView headerMessage;
+    @BindView(R.id.flash_icon)
+    ImageButton flashIcon;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -255,4 +263,21 @@ public class BaseActivity extends FragmentActivity implements QrFragment.StartCh
             locationSettingDialog.showDialog(this);
         }
     }
+
+
+    @OnClick(R.id.flash_icon)
+    public void flashIconOnClick(){
+        if(flash){
+            flash = false;
+            flashIcon.setImageResource(R.drawable.ic_flash_on);
+        }else{
+            flash = true;
+            flashIcon.setImageResource(R.drawable.ic_flash_off);
+        }
+
+        final Intent intent = new Intent("SET_FLASH");
+        LocalBroadcastManager.getInstance(getBaseContext()).sendBroadcast(intent);
+    }
 }
+
+

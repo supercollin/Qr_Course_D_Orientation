@@ -1,6 +1,8 @@
 package com.android.dev.qrcoursedorientation.presentation.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -17,7 +19,9 @@ import android.widget.Toast;
 
 import com.android.dev.qrcoursedorientation.managers.CheckPointManager;
 import com.android.dev.qrcoursedorientation.managers.CourseManager;
+import com.android.dev.qrcoursedorientation.models.Checkpoint;
 import com.android.dev.qrcoursedorientation.presentation.component.DisplayToast;
+import com.android.dev.qrcoursedorientation.presentation.viewmodel.QrCheckpointViewModel;
 import com.android.dev.qrcoursedorientation.presentation.viewsinterfaces.QrView;
 
 import com.android.dev.qrcoursedorientation.services.GPSTracker;
@@ -58,6 +62,7 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         mScannerView = new ZXingScannerView(this.getContext());   // Programmatically initialize the scanner view
         view = mScannerView;                // Set the scanner view as the content view
         mScannerView.startCamera();
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("SET_FLASH"));
         return view;
     }
 
@@ -72,6 +77,12 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
     public void onPause() {
         super.onPause();
         mScannerView.stopCamera();           // Stop camera on pause
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(broadcastReceiver);
     }
 
     @Override
@@ -96,4 +107,19 @@ public class QrFragment extends Fragment implements QrView, ZXingScannerView.Res
         intent.putExtra("CHECKPOINT_LIST", "update");
         LocalBroadcastManager.getInstance(this.getContext()).sendBroadcast(intent);
     }
+
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if ("SET_FLASH".equals(intent.getAction()) == true) {
+                if(mScannerView.getFlash()){
+                    mScannerView.setFlash(false);
+                }else{
+                    mScannerView.setFlash(true);
+                }
+            }
+        }
+    };
+
 }
