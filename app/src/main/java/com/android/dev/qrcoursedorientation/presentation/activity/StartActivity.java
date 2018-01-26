@@ -24,15 +24,20 @@ public class StartActivity extends AppCompatActivity {
 
     CreateCourseDialog createCourseDialog;
 
+    Button buttonCreateCourse;
+    Button buttonRunCourse;
+    Button buttonChronicle;
+    Button buttonRestartCourse;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        Button buttonCreateCourse = findViewById(R.id.buttonCreateCourse) ;
-        Button buttonRunCourse = findViewById(R.id.buttonRunCourse) ;
-        Button buttonChronicle = findViewById(R.id.buttonChronicle) ;
-        Button buttonRestartCourse = findViewById(R.id.restartCourse);
+        buttonCreateCourse = findViewById(R.id.buttonCreateCourse) ;
+        buttonRunCourse = findViewById(R.id.buttonRunCourse) ;
+        buttonChronicle = findViewById(R.id.buttonChronicle) ;
+        buttonRestartCourse = findViewById(R.id.restartCourse);
 
         try {
             CourseManager.setCourseListFromList(FileReader.fileReader());
@@ -89,6 +94,21 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(Objects.equals(CourseManager.getCurrentCourse().getStatus(), "start")){
+            buttonRestartCourse.setVisibility(View.VISIBLE);
+            Course course = CourseManager.getCurrentCourse();
+            CheckPointManager.setCheckpointList(course.getCheckpointList());
+            CheckPointManager.setTimeStampBase(course.getTimestamp());
+            CheckPointManager.setRun(true);
+        }else{
+            buttonRestartCourse.setVisibility(View.INVISIBLE);
+            CheckPointManager.cleanCheckpointManager();
+        }
     }
 }
 
